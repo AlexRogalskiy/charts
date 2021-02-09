@@ -39,16 +39,16 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/AlexRogalskiy/styled-charts.git"
+        "url": "git+https://github.com/AlexRogalskiy/charts.git"
     },
     "keywords": [
         "github-actions",
         "javascript"
     ],
     "bugs": {
-        "url": "https://github.com/AlexRogalskiy/styled-charts/issues"
+        "url": "https://github.com/AlexRogalskiy/charts/issues"
     },
-    "homepage": "https://github.com/AlexRogalskiy/styled-charts",
+    "homepage": "https://github.com/AlexRogalskiy/charts",
     "author": {
         "name": "Alexander Rogalskiy",
         "url": "https://github.com/AlexRogalskiy"

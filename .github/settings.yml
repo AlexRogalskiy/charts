@@ -2,7 +2,7 @@
 ---
 repository:
   description: "styled-charts"
-  homepage: https://github.com/AlexRogalskiy/styled-charts
+  homepage: https://github.com/AlexRogalskiy/charts
   topics: web, documents, visualization
   private: false
   has_issues: true

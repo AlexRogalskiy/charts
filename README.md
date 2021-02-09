@@ -6,10 +6,10 @@
 ![type definitions](https://img.shields.io/npm/types/typescript?style=flat-square)
 ![code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/alexrogalskiy/styled-charts/master/LICENSE?token=AH44ZFH7IF2KSEDK7LSIW3C7YOFYC)
-[![Issue](https://img.shields.io/github/issues/alexrogalskiy/styled-charts)](https://img.shields.io/github/issues/alexrogalskiy/styled-charts)
-[![Forks](https://img.shields.io/github/forks/alexrogalskiy/styled-charts)](https://img.shields.io/github/forks/alexrogalskiy/styled-charts)
-[![Stars](https://img.shields.io/github/stars/alexrogalskiy/styled-charts)](https://img.shields.io/github/stars/alexrogalskiy/styled-charts)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/alexrogalskiy/charts/master/LICENSE?token=AH44ZFH7IF2KSEDK7LSIW3C7YOFYC)
+[![Issue](https://img.shields.io/github/issues/alexrogalskiy/charts)](https://img.shields.io/github/issues/alexrogalskiy/charts)
+[![Forks](https://img.shields.io/github/forks/alexrogalskiy/charts)](https://img.shields.io/github/forks/alexrogalskiy/charts)
+[![Stars](https://img.shields.io/github/stars/alexrogalskiy/charts)](https://img.shields.io/github/stars/alexrogalskiy/charts)
 
 </div>
 
