@@ -34,13 +34,11 @@
             "always-multiline"
         ],
         "no-case-declarations": "off",
-        "react/jsx-sort-props": "error",
         "eqeqeq": "warn",
         "quote-props": [
             "warn",
             "consistent-as-needed"
         ],
-        "react/no-deprecated": "off",
         "no-console": 0,
         "keyword-spacing": "error",
         "eslint-comments/no-use": "off",
@@ -95,7 +93,16 @@
             "never"
         ],
         "@typescript-eslint/type-annotation-spacing": "error",
-        "@typescript-eslint/unbound-method": "error"
+        "@typescript-eslint/unbound-method": "error",
+        "@typescript-eslint/ban-ts-ignore": "error",
+        "@typescript-eslint/camelcase": "error",
+        "@typescript-eslint/class-name-casing": "error",
+        "@typescript-eslint/generic-type-naming": [
+            "error",
+            "^[A-Z][A-Za-z]*$"
+        ],
+        "@typescript-eslint/no-object-literal-type-assertion": "error",
+        "@typescript-eslint/prefer-interface": "error"
     },
     "env": {
         "node": true,

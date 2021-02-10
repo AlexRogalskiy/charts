@@ -1,7 +1,7 @@
 import { Plotly } from 'plotly.js-dist'
 //import { PlotlyGeo } from 'plotly.js-geo-dist'
 import { promises } from 'fs'
-import { jsdom } from 'jsdom'
+import { JSDOM, VirtualConsole } from 'jsdom'
 
 import { ParsedRequest } from '../typings/types'
 import { css } from './getCss'
@@ -41,30 +41,49 @@ export async function chartRenderer(parsedRequest: ParsedRequest) {
   //   }
   // };
 
+  // const plotJSON = {
+  //   data: [{
+  //     x: [1,2,3,4],
+  //     y: [1,3,2,6],
+  //     type: 'bar',
+  //     marker: {color: '#ab63fa'},
+  //     name: 'Bar'
+  //   }, {
+  //     x: [1,2,3,4],
+  //     y: [3,2,7,4],
+  //     type: 'line',
+  //     marker: {color: '#19d3f3'},
+  //     name: 'Line'
+  //   }],
+  //   layout: {
+  //     plotBackground: '#f3f6fa',
+  //     margin: {t:0, r: 0, l: 20, b: 30},
+  //   }
+  // }
+
   const fig = {data: [{y: [1, 2, 1]}]}
   const opts = {format: 'svg', imageDataOnly: true, height: 800, width: 800}
 
-  const virtualConsole = new jsdom.VirtualConsole()
+  const virtualConsole = new VirtualConsole()
+  //const dom = new virtualConsole(``, { virtualConsole });
   virtualConsole.sendTo(console)
 
-  const w = new jsdom.JSDOM('', {runScripts: 'dangerously', virtualConsole}).window
-  // mock a few things that JSDOM doesn't support out-of-the-box
+  const w = new JSDOM('', {runScripts: 'dangerously', virtualConsole}).window
   w.HTMLCanvasElement.prototype.getContext = () => null
   w.URL.createObjectURL = () => null
 
   promises.readFile(Plotly, 'utf-8')
-    .then(w.eval)
-    .then(() => w.Plotly.toImage(fig, opts))
-    .then(img => promises.writeFile('fig.svg', img))
+    // .then(w.eval)
+    // .then(() => w.Plotly.toImage(fig, opts))
+    // .then(img => promises.writeFile('fig.svg', img))
     .catch(console.warn)
 
   return `
       <svg
-        width="580"
+        width="100%"
         height="100%"
-        viewBox="0 0 580 100%"
         xmlns="http://www.w3.org/2000/svg">
-        <foreignObject x="0" y="0" width="580" height="100%">
+        <foreignObject x="0" y="0" width="100%" height="100%">
             <div xmlns="http://www.w3.org/1999/xhtml">
               <div class="chart-wrapper">
                 <div class="chart-wrapper-desc">
