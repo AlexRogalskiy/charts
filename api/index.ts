@@ -6,25 +6,18 @@ export default async function render(req: NowRequest, res: NowResponse) {
   try {
     const {
       url,
-      category,
       width,
-      height,
-      backgroundColor,
-      fontColor
+      height
     } = req.query
 
     const link = toString(url)
-    const categoryType = toString(category)
     const widthSize = toInt(toString(width), 400)
     const heightSize = toInt(toString(height), 200)
 
     const chart = await chartRenderer({
       link,
-      categoryType,
       widthSize,
-      heightSize,
-      backgroundColor,
-      fontColor
+      heightSize
     })
 
     res.setHeader(

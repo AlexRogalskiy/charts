@@ -12,7 +12,6 @@
         "test": "jest"
     },
     "dependencies": {
-        "fs.promises": "^0.1.2",
         "isomorphic-unfetch": "^3.1.0",
         "jsdom": "^16.4.0",
         "lodash.clonedeep": "^4.5.0",

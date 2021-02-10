@@ -22,6 +22,14 @@ module.exports = {
     '!**/scenarios/**',
     '!**/redirects/**',
   ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 90,
+      "functions": 90,
+      "lines": 90,
+      "statements": 90
+    }
+  },
   coverageDirectory: './coverage',
   coverageReporters: [ 'json', 'lcov', 'text', 'clover', 'html' ]
 }
