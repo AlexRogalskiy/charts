@@ -1,23 +1,18 @@
 import { NowRequest, NowResponse } from '@vercel/node/dist'
 import { chartRenderer } from '../utils/chart'
 import { toInt, toString } from '../utils/commons'
+import { CONFIG } from '../utils/config'
 
 export default async function render(req: NowRequest, res: NowResponse) {
   try {
-    const {
+    const url = toString(req.query.url)
+    const width = toInt(toString(req.query.width), CONFIG.options.width)
+    const height = toInt(toString(req.query.height), CONFIG.options.height)
+
+    const chart = await chartRenderer({
       url,
       width,
       height
-    } = req.query
-
-    const link = toString(url)
-    const widthSize = toInt(toString(width), 400)
-    const heightSize = toInt(toString(height), 200)
-
-    const chart = await chartRenderer({
-      link,
-      widthSize,
-      heightSize
     })
 
     res.setHeader(
