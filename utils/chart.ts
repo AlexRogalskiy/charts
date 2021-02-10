@@ -1,11 +1,12 @@
 import { JSDOM, VirtualConsole } from 'jsdom'
 import { ParsedRequest } from '../typings/types'
+import { toJsonUrl, toUrl } from '../utils/commons'
 
 export async function chartRenderer(parsedRequest: ParsedRequest) {
   const {
-    url,
-    height,
-    width
+    link,
+    heightSize,
+    widthSize
   } = parsedRequest
 
   const layout = {
@@ -75,10 +76,12 @@ export async function chartRenderer(parsedRequest: ParsedRequest) {
   const opts = {
     format: 'svg',
     imageDataOnly: true,
-    showLinks: false,
+    showLinks: true,
     height: 800,
     width: 800
   }
+
+  const data = await toJsonUrl(toUrl(link)).catch(console.error)
 
   const virtualConsole = new VirtualConsole()
   virtualConsole.sendTo(console)
@@ -93,7 +96,7 @@ export async function chartRenderer(parsedRequest: ParsedRequest) {
   const pathToPlotly = require.resolve('plotly.js-dist')
   return fs.promises.readFile(pathToPlotly, 'utf-8')
     .then(w.eval)
-    .then(() => w.Plotly.toImage(plotJSON, opts))
+    .then(() => w.Plotly.toImage(data, opts))
     //.then(img => fs.promises.writeFile('fig.svg', img))
     .catch(console.error)
 }

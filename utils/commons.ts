@@ -9,12 +9,35 @@ export const toBase64ImageUrl = async (imgUrl: any): Promise<string> => {
   return `data:${fetchImageUrl.headers.get('Content-Type') || 'image/png'};base64,${Buffer.from(responseArrBuffer).toString('base64')}`
 }
 
+export const toJsonUrl = async (url: any): Promise<string> => {
+  return await fetch(url)
+    .then((response) => response.json())
+    .then((newJSON) => {
+      if ('layout' in newJSON) {
+        if ('height' in newJSON.layout) {
+          newJSON.layout.height = null;
+        }
+        if ('width' in newJSON.layout) {
+          newJSON.layout.width = null;
+        }
+      }
+      return newJSON;
+    });
+}
+
 export const isNonEmptyString = (str: string): boolean => {
   return str && str.length > 0
 }
 
 export const isBlankString = (str: string): boolean => {
   return (!str || /^\s*$/.test(str))
+}
+
+export const toUrl = (str: string): string => {
+  if (isBlankString(str)) throw Error("Source URL should not be blank or empty")
+  str = str.startsWith('http') ? str : 'http://' + str
+  str = str.endsWith('.json') ? str : str + '.json'
+  return str
 }
 
 export const toString = (str: string | string[]): string => {
