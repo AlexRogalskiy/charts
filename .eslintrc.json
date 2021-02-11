@@ -15,7 +15,7 @@
     "rules": {
         "indent": [
             "error",
-            "tab"
+            4
         ],
         "linebreak-style": [
             "error",
@@ -94,15 +94,13 @@
         ],
         "@typescript-eslint/type-annotation-spacing": "error",
         "@typescript-eslint/unbound-method": "error",
-        "@typescript-eslint/ban-ts-ignore": "error",
-        "@typescript-eslint/camelcase": "error",
-        "@typescript-eslint/class-name-casing": "error",
-        "@typescript-eslint/generic-type-naming": [
-            "error",
-            "^[A-Z][A-Za-z]*$"
-        ],
-        "@typescript-eslint/no-object-literal-type-assertion": "error",
-        "@typescript-eslint/prefer-interface": "error"
+        "@typescript-eslint/member-ordering": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/no-floating-promises": "warn",
+        "@typescript-eslint/no-empty-function": "warn",
+        "@typescript-eslint/no-this-alias": "warn",
+        "@typescript-eslint/ban-types": "warn",
+        "@typescript-eslint/quotes": "off"
     },
     "env": {
         "node": true,
