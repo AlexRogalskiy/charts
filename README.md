@@ -16,6 +16,15 @@
 ## _Table of contents_
 
 <!--ts-->
+   * [<em>Styled charts</em>](#styled-charts)
+      * [<em>Table of contents</em>](#table-of-contents)
+      * [<em>Description</em>](#description)
+      * [<em>How to use</em>](#how-to-use)
+      * [<em>Example</em>](#example)
+      * [<em>Contribution</em>](#contribution)
+
+<!-- Added by: runner, at: Sat Feb 13 16:30:31 UTC 2021 -->
+
 <!--te-->
 
 ## _Description_
