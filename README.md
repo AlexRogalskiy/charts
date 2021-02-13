@@ -1,7 +1,7 @@
-<div align="center">
-<h1>Styled charts</h1>
+# _Styled charts_
 
-<p>Get your styled charts dynamically 😎</p>
+<div align="center">
+<p>Create your styled charts dynamically</p>
 
 ![type definitions](https://img.shields.io/npm/types/typescript?style=flat-square)
 ![code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
@@ -13,14 +13,17 @@
 
 </div>
 
-# Description
+## _Table of contents_
 
-A few months ago, Github launched a new feature call Magic Readme which is that file readme will be appear in your github profile and you can set your skills, portfolio, etc in that file readme.
+<!--ts-->
+<!--te-->
 
-Charts is a serverless dynamically functions that generate styled images based on SVG (Scalable Vector Graphics).
-For the tech stack, _**Styled Charts**_ using Typescript and serverless function from Vercel and also this project had been deployed on Vercel.
+## _Description_
 
-# How to use this?
+Charts is a serverless dynamically function that generates styled graph images based on SVG (Scalable Vector Graphics).
+For the tech stack, _**Styled Charts**_ using Typescript and serverless function from Vercel as this project had been deployed on Vercel stack.
+
+## _How to use_
 
 It's simple, you can copy paste this markdown content, like this one:
 
@@ -28,7 +31,7 @@ It's simple, you can copy paste this markdown content, like this one:
 ![Styled Charts](https://styled-charts.alexrogalskiy.vercel.app/api?category=[category])
 ```
 
-There are several options you can use, and the options is:
+There are several options you can use from the list:
 
 |  Options  | Description               |   Type                           | Example                | Query Params          | 
 | --------- | ------------------------- | -------------------------------- | ---------------------- | --------------------- |
@@ -36,11 +39,9 @@ There are several options you can use, and the options is:
 | Width     | Chart graph image width   | Numeric image width              | 400                    | ```&width=[value]```  |
 | Height    | Chart graph image height  | Numeric image height             | 400                    | ```&height=[value]``` |
 
-# Example
+## _Example_
 
-This is example of using *Styled Charts*:
-
-Markdown content: 
+This is example of using _**Styled Charts**_:
 
 ```
 ![Styled Charts](https://styled-charts.vercel.app/api?url=https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/0.json&width=400&height=400)
@@ -50,7 +51,7 @@ Result:
 
 ![Styled Charts](https://styled-charts.vercel.app/api?url=https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/0.json&width=400&height=400)
 
-# Contribution
+## _Contribution_
 
 Want to make this project better? You can contribute this project, I am very open if there are contributions to this project.
 
@@ -59,4 +60,4 @@ Want to make this project better? You can contribute this project, I am very ope
 ![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)
 ![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)
 
-Powered by Typescript and Vercel. Code licensed under MIT License.
+Powered by Typescript and Vercel. Code licensed under GPL-3.0 license.
