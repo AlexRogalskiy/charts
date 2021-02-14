@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 
-export const toBase64ImageUrl = async (imgUrl: any): Promise<string> => {
+export const toBase64ImageUrl = async (imgUrl): Promise<string> => {
     const fetchImageUrl = await fetch(imgUrl)
     const responseArrBuffer = await fetchImageUrl.arrayBuffer()
 

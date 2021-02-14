@@ -15,12 +15,9 @@ export default async function render(req: NowRequest, res: NowResponse): Promise
             options
         })
 
-        res.setHeader(
-            "Cache-Control",
-            "no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate"
-        )
-        res.setHeader("Pragma", "no-cache")
-        res.setHeader("Expires", "-1")
+        res.setHeader('Cache-Control', 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate')
+        res.setHeader('Pragma', 'no-cache')
+        res.setHeader('Expires', '-1')
         res.setHeader('Content-type', 'image/svg+xml')
 
         return res.send(chart)
