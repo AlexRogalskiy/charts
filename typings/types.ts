@@ -1,13 +1,23 @@
+export interface ImageOptions {
+  readonly format: string
+  readonly imageDataOnly: boolean
+  readonly showLinks: boolean
+  readonly width: number
+  readonly height: number
+}
+
 export interface ParsedRequest {
   url: string
-  width: number
-  height: number
+  options?: ParsedImageOptions
 }
 
 export interface ParsedImageOptions {
-  format: string
-  imageDataOnly: boolean
-  showLinks: boolean
-  width: number
-  height: number
+  imageDataOnly?: boolean
+  showLinks?: boolean
+  width?: number
+  height?: number
+}
+
+export interface ConfigOptions {
+  imageOptions: ImageOptions
 }

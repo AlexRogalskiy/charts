@@ -6,13 +6,13 @@ import { CONFIG } from '../utils/config'
 export default async function render(req: NowRequest, res: NowResponse) {
   try {
     const url = toString(req.query.url)
-    const width = toInt(toString(req.query.width), CONFIG.options.width)
-    const height = toInt(toString(req.query.height), CONFIG.options.height)
+    const width = toInt(toString(req.query.width), CONFIG.imageOptions.width)
+    const height = toInt(toString(req.query.height), CONFIG.imageOptions.height)
+    const options = {width, height}
 
     const chart = await chartRenderer({
       url,
-      width,
-      height
+      options
     })
 
     res.setHeader(
