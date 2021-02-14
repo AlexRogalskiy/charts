@@ -6,6 +6,6 @@ export const CONFIG: ConfigOptions = {
         imageDataOnly: true,
         showLinks: true,
         height: 800,
-        width: 800
-    }
+        width: 800,
+    },
 }
