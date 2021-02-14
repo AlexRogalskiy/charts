@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 
-export const randomElement = (arr: Array<any>) => arr[Math.floor(Math.random() * arr.length)]
+export const randomElement = (arr: Array<any>): any => arr[Math.floor(Math.random() * arr.length)]
 
 export const toBase64ImageUrl = async (imgUrl: any): Promise<string> => {
   const fetchImageUrl = await fetch(imgUrl)
@@ -9,20 +9,20 @@ export const toBase64ImageUrl = async (imgUrl: any): Promise<string> => {
   return `data:${fetchImageUrl.headers.get('Content-Type') || 'image/png'};base64,${Buffer.from(responseArrBuffer).toString('base64')}`
 }
 
-export const toJsonUrl = async (url: any): Promise<string> => {
+export const toJsonUrl = async (url: RequestInfo): Promise<string> => {
   return await fetch(url)
     .then((response) => response.json())
-    .then((newJSON) => {
-      if ('layout' in newJSON) {
-        if ('height' in newJSON.layout) {
-          newJSON.layout.height = null;
+    .then(value => {
+      if ('layout' in value) {
+        if ('height' in value.layout) {
+          value.layout.height = null;
         }
-        if ('width' in newJSON.layout) {
-          newJSON.layout.width = null;
+        if ('width' in value.layout) {
+          value.layout.width = null;
         }
       }
-      return newJSON;
-    });
+      return value;
+    })
 }
 
 export const isNonEmptyString = (str: string): boolean => {

@@ -1,25 +1,37 @@
 import { JSDOM, VirtualConsole } from 'jsdom'
-import { ParsedRequest } from '../typings/types'
+import { ParsedImageOptions, ParsedRequest } from '../typings/types'
 import { toJsonUrl, toUrl } from './commons'
 import { CONFIG } from './config'
 
 export async function chartRenderer(parsedRequest: ParsedRequest) {
-  const options = {...CONFIG.options, ...parsedRequest};
-  const data = await toJsonUrl(toUrl(options.url)).catch(console.error)
+  const options = {...CONFIG.options, ...parsedRequest}
+  const url = await toJsonUrl(toUrl(parsedRequest.url))
+    .catch(console.error)
+  const virtualConsole = createVirtualConsole();
+  const virtualWindow = createVirtualWindow(virtualConsole);
+  return await createChart(url, options, virtualWindow)
+    .catch(console.error)
+}
 
+const createVirtualConsole = (): VirtualConsole => {
   const virtualConsole = new VirtualConsole()
   virtualConsole.sendTo(console)
-  virtualConsole.on('log', message => console.log('console.log called ->', message));
-  virtualConsole.on('jsdomError', message => console.error('Error ->', message));
+  virtualConsole.on('log', message => console.log('console.log called -> ', message))
+  virtualConsole.on('jsdomError', message => console.error('Error -> ', message))
+  return virtualConsole
+}
 
-  const w = new JSDOM('', {runScripts: 'dangerously', virtualConsole}).window
-  w.HTMLCanvasElement.prototype.getContext = () => null
-  w.URL.createObjectURL = () => null
+const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
+  const jsDomWindow = new JSDOM('', {runScripts: 'dangerously', virtualConsole}).window
+  jsDomWindow.HTMLCanvasElement.prototype.getContext = () => null
+  jsDomWindow.URL.createObjectURL = () => null
+  return jsDomWindow
+}
 
+const createChart = async (url: any, options: ParsedImageOptions, virtualWindow): Promise<string> => {
   const fs = require('fs');
   const pathToPlotly = require.resolve('plotly.js-dist')
-  return fs.promises.readFile(pathToPlotly, 'utf-8')
-    .then(w.eval)
-    .then(() => w.Plotly.toImage(data, options))
-    .catch(console.error)
+  return await fs.promises.readFile(pathToPlotly, 'utf-8')
+    .then(virtualWindow.eval)
+    .then(() => virtualWindow.Plotly.toImage(url, options))
 }
