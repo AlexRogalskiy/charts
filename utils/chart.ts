@@ -3,7 +3,7 @@ import { ParsedImageOptions, ParsedRequest } from '../typings/types'
 import { toJsonUrl, toUrl } from './commons'
 import { CONFIG } from './config'
 
-export async function chartRenderer(parsedRequest: ParsedRequest) {
+export async function chartRenderer(parsedRequest: ParsedRequest): Promise<string | void> {
   const options = {...CONFIG.imageOptions, ...parsedRequest.options}
   const url = await toJsonUrl(toUrl(parsedRequest.url)).catch(console.error)
   const virtualConsole = createVirtualConsole()
