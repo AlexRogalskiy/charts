@@ -90,5 +90,5 @@ export const pluck = <T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] =>
 }
 
 export const mergeProps = <T>(...obj: unknown[]): T => {
-    return _.mergeWith({}, ...obj, (o, s) => (_._.value === null ? o : s))
+    return _.mergeWith({}, ...obj, (o, s) => (_.isNull(_._.value) ? o : s))
 }
