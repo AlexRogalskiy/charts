@@ -8,13 +8,20 @@ export const toBase64ImageUrl = async (imgUrl): Promise<string> => {
     return `data:${fetchImageUrl.headers.get('Content-Type') || 'image/png'};base64,${Buffer.from(responseArrBuffer).toString('base64')}`
 }
 
-export const requireValidUrl = (str: string): string => {
+export const isValidUrl = (str: string): boolean => {
     try {
         new URL(str)
-        return str
+        return true
     } catch (e) {
-        throw e
+        return false
     }
+}
+
+export const requireValidUrl = (str: string): string => {
+    if (isValidUrl(str)) {
+        return str
+    }
+    throw new Error(`Invalid URL: ${str}`)
 }
 
 export const toJsonUrl = async (url: RequestInfo): Promise<string> => {
@@ -34,7 +41,7 @@ export const toJsonUrl = async (url: RequestInfo): Promise<string> => {
 }
 
 export const isNonEmptyString = (str: string): boolean => {
-    return str && str.length > 0
+    return str !== undefined && str.length > 0
 }
 
 export const isBlankString = (str: string): boolean => {
@@ -48,6 +55,20 @@ export const toUrl = (str: string): string => {
     return str
 }
 
+export const toFormatString = (obj): string => {
+    return `(${objToString(obj)})`
+}
+
+const objToString = (obj): string => {
+    let str = ''
+    for (const p in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, p)) {
+            str += `${p} => ${typeof obj[p] === 'object' ? `[${objToString(obj[p])}]` : `${obj[p]},`}`
+        }
+    }
+    return str
+}
+
 export const notBlankOrElse = (str: string, defaultValue: string): string => {
     return isBlankString(str) ? defaultValue : str
 }
@@ -56,7 +77,7 @@ export const toString = (str: string | string[]): string => {
     return Array.isArray(str) ? str[0] : str
 }
 
-export const toInt = (str: string, defaultValue?: number): number => {
+export const toInt = (str: string, defaultValue?: number): number | undefined => {
     try {
         return parseInt(str) || defaultValue
     } catch (e) {
@@ -69,5 +90,5 @@ export const pluck = <T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] =>
 }
 
 export const mergeProps = <T>(...obj: unknown[]): T => {
-    return _.mergeWith({}, ...obj, (o, s) => (_.value === null ? o : s))
+    return _.mergeWith({}, ...obj, (o, s) => (_._.value === null ? o : s))
 }

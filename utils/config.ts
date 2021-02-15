@@ -1,4 +1,4 @@
-import { ConfigOptions } from "../typings/types"
+import { ConfigOptions } from '../typings/types'
 
 export const CONFIG: ConfigOptions = {
     imageOptions: {

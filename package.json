@@ -25,6 +25,7 @@
     },
     "devDependencies": {
         "@types/jest": "^26.0.20",
+        "@types/lodash": "^4.14.168",
         "@types/prettier": "^2.1.5",
         "@typescript-eslint/eslint-plugin": "^4.15.0",
         "@typescript-eslint/parser": "^4.15.0",
@@ -46,6 +47,12 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/AlexRogalskiy/charts.git"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "engines": {
+        "node": ">= 8.0.0"
     },
     "keywords": [
         "github-actions",

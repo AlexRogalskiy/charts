@@ -1,4 +1,5 @@
 import { NowRequest, NowResponse, VercelResponse } from '@vercel/node/dist'
+
 import { chartRenderer } from '../utils/chart'
 import { requireValidUrl, toInt, toString } from '../utils/commons'
 
@@ -7,6 +8,7 @@ export default async function render(req: NowRequest, res: NowResponse): Promise
         const url = requireValidUrl(toString(req.query.url))
         const width = toInt(toString(req.query.width))
         const height = toInt(toString(req.query.height))
+
         const options = {width, height}
 
         const chart = await chartRenderer({

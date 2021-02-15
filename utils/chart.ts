@@ -1,11 +1,23 @@
 import { JSDOM, VirtualConsole } from 'jsdom'
+
 import { ImageOptions, ParsedRequest } from '../typings/types'
-import { mergeProps, toJsonUrl, toUrl } from './commons'
+import { mergeProps, toFormatString, toJsonUrl, toUrl } from './commons'
 import { CONFIG } from './config'
 
+const fs = require('fs')
+const pathToPlotly = require.resolve('plotly.js-dist')
+
 export async function chartRenderer(parsedRequest: ParsedRequest): Promise<string | void> {
-    const options: ImageOptions = mergeProps(CONFIG.imageOptions, parsedRequest.options)
     const url = await toJsonUrl(toUrl(parsedRequest.url)).catch(console.error)
+    const options: ImageOptions = mergeProps(CONFIG.imageOptions, parsedRequest.options)
+
+    console.log(
+        `\n>>> Generating chart with parameters:
+        url=${parsedRequest.url},
+        options=${toFormatString(options)}
+        `
+    )
+
     const virtualConsole = createVirtualConsole()
     const virtualWindow = createVirtualWindow(virtualConsole)
 
@@ -30,9 +42,6 @@ const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
 }
 
 const createChart = async (url: unknown, options: ImageOptions, virtualWindow: JSDOM): Promise<string> => {
-    const fs = require('fs')
-    const pathToPlotly = require.resolve('plotly.js-dist')
-
     return await fs.promises.readFile(pathToPlotly, 'utf-8')
         .then(virtualWindow.eval)
         .then(() => virtualWindow.Plotly.toImage(url, options))
