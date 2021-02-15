@@ -8,6 +8,15 @@ export const toBase64ImageUrl = async (imgUrl): Promise<string> => {
     return `data:${fetchImageUrl.headers.get('Content-Type') || 'image/png'};base64,${Buffer.from(responseArrBuffer).toString('base64')}`
 }
 
+export const requireValidUrl = (str: string): string => {
+    try {
+        new URL(str)
+        return str
+    } catch (e) {
+        throw e
+    }
+}
+
 export const toJsonUrl = async (url: RequestInfo): Promise<string> => {
     return await fetch(url)
         .then((response) => response.json())
