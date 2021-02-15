@@ -1,10 +1,10 @@
 import { JSDOM, VirtualConsole } from 'jsdom'
-import { ParsedImageOptions, ParsedRequest } from '../typings/types'
-import { toJsonUrl, toUrl } from './commons'
+import { ImageOptions, ParsedRequest } from '../typings/types'
+import { mergeProps, toJsonUrl, toUrl } from './commons'
 import { CONFIG } from './config'
 
 export async function chartRenderer(parsedRequest: ParsedRequest): Promise<string | void> {
-    const options = {...CONFIG.imageOptions, ...parsedRequest.options}
+    const options: ImageOptions = mergeProps(CONFIG.imageOptions, parsedRequest.options)
     const url = await toJsonUrl(toUrl(parsedRequest.url)).catch(console.error)
     const virtualConsole = createVirtualConsole()
     const virtualWindow = createVirtualWindow(virtualConsole)
@@ -29,7 +29,7 @@ const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
     return jsDomWindow
 }
 
-const createChart = async (url, options: ParsedImageOptions, virtualWindow: JSDOM): Promise<string> => {
+const createChart = async (url, options: ImageOptions, virtualWindow: JSDOM): Promise<string> => {
     const fs = require('fs')
     const pathToPlotly = require.resolve('plotly.js-dist')
 

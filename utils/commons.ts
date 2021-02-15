@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-unfetch'
+import _ from 'lodash'
 
 export const toBase64ImageUrl = async (imgUrl): Promise<string> => {
     const fetchImageUrl = await fetch(imgUrl)
@@ -28,7 +29,7 @@ export const isNonEmptyString = (str: string): boolean => {
 }
 
 export const isBlankString = (str: string): boolean => {
-    return (!str || /^\s*$/.test(str))
+    return !str || /^\s*$/.test(str)
 }
 
 export const toUrl = (str: string): string => {
@@ -46,10 +47,18 @@ export const toString = (str: string | string[]): string => {
     return Array.isArray(str) ? str[0] : str
 }
 
-export const toInt = (str: string, defaultValue: number): number => {
+export const toInt = (str: string, defaultValue?: number): number => {
     try {
         return parseInt(str) || defaultValue
     } catch (e) {
         return defaultValue
     }
+}
+
+export const pluck = <T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] => {
+    return propertyNames.map(n => o[n])
+}
+
+export const mergeProps = <T>(...obj: unknown[]): T => {
+    return _.mergeWith({}, ...obj, (o, s) => (_.value === null ? o : s))
 }
