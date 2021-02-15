@@ -19,5 +19,5 @@ export interface ParsedImageOptions {
 }
 
 export interface ConfigOptions {
-    imageOptions: ImageOptions
+    readonly imageOptions: ImageOptions
 }

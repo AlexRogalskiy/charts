@@ -18,6 +18,7 @@ export default async function render(req: NowRequest, res: NowResponse): Promise
         res.setHeader('Pragma', 'no-cache')
         res.setHeader('Expires', '-1')
         res.setHeader('Content-type', 'image/svg+xml')
+        res.setHeader('X-Powered-By', 'Vercel')
 
         return res.send(chart)
     } catch (error) {

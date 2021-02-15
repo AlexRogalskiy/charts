@@ -29,7 +29,7 @@ const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
     return jsDomWindow
 }
 
-const createChart = async (url, options: ImageOptions, virtualWindow: JSDOM): Promise<string> => {
+const createChart = async (url: unknown, options: ImageOptions, virtualWindow: JSDOM): Promise<string> => {
     const fs = require('fs')
     const pathToPlotly = require.resolve('plotly.js-dist')
 
