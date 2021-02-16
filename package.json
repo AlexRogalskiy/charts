@@ -8,7 +8,7 @@
         "deploy:dev": "vercel",
         "deploy:prod": "vercel --prod",
         "develop": "vercel dev",
-        "lint": "eslint --fix .",
+        "lint": "eslint --fix --quiet -f codeframe --ext js,ts .",
         "test": "TZ=utc jest",
         "test:coverage": "jest --collectCoverage",
         "test:watch": "jest --watch"
