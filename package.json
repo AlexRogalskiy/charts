@@ -52,7 +52,7 @@
         "access": "public"
     },
     "engines": {
-        "node": ">= 8.0.0"
+        "node": ">= 10.x"
     },
     "keywords": [
         "github-actions",
