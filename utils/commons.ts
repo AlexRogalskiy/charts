@@ -5,7 +5,9 @@ export const toBase64ImageUrl = async (imgUrl): Promise<string> => {
     const fetchImageUrl = await fetch(imgUrl)
     const responseArrBuffer = await fetchImageUrl.arrayBuffer()
 
-    return `data:${fetchImageUrl.headers.get('Content-Type') || 'image/png'};base64,${Buffer.from(responseArrBuffer).toString('base64')}`
+    return `data:${fetchImageUrl.headers.get('Content-Type') || 'image/png'};base64,${Buffer.from(
+        responseArrBuffer
+    ).toString('base64')}`
 }
 
 export const isValidUrl = (str: string): boolean => {
@@ -26,17 +28,17 @@ export const requireValidUrl = (str: string): string => {
 
 export const toJsonUrl = async (url: RequestInfo): Promise<string> => {
     return await fetch(url)
-        .then((response) => response.json())
+        .then(async response => response.json())
         .then(value => {
             if ('layout' in value) {
                 if ('height' in value.layout) {
-                    value.layout.height = null;
+                    value.layout.height = null
                 }
                 if ('width' in value.layout) {
-                    value.layout.width = null;
+                    value.layout.width = null
                 }
             }
-            return value;
+            return value
         })
 }
 
@@ -49,9 +51,9 @@ export const isBlankString = (str: string): boolean => {
 }
 
 export const toUrl = (str: string): string => {
-    if (isBlankString(str)) throw Error("Source URL should not be blank or empty")
-    str = str.startsWith('http') ? str : 'http://' + str
-    str = str.endsWith('.json') ? str : str + '.json'
+    if (isBlankString(str)) throw Error('Source URL should not be blank or empty')
+    str = str.startsWith('http') ? str : `http://${str}`
+    str = str.endsWith('.json') ? str : `${str}.json`
     return str
 }
 
@@ -92,3 +94,10 @@ export const pluck = <T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] =>
 export const mergeProps = <T>(...obj: unknown[]): T => {
     return _.mergeWith({}, ...obj, (o, s) => (_.isNull(s) ? o : s))
 }
+
+export const wait = async (ms: number, ...args: unknown[]): Promise<void> => {
+    new Promise(resolve => setTimeout(resolve, ms, args))
+}
+
+export const composeAsync = async (...funcs) => async x =>
+    await funcs.reduce((acc, val) => acc.then(val), Promise.resolve(x))

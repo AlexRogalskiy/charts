@@ -54,7 +54,7 @@
 </p>
 
 _**Styled Charts**_ is a serverless function that generates dynamically styled graph images based on SVG (Scalable Vector Graphics).
-For the tech stack, _**Styled Charts**_ using Typescript and serverless function from Vercel as this project had been deployed on Vercel stack.
+For the tech stack, _**Styled Charts**_ using Typescript and serverless function from Vercel stack.
 
 ## _How to use_
 
@@ -139,6 +139,7 @@ Like _**Styled Charts**_ ? Consider buying me a coffee :\)
 [![forthebadge](https://img.shields.io/badge/made%20with-%20typescript-C1282D.svg?logo=typescript&style=for-the-badge)](https://www.typescriptlang.org/)
 [![forthebadge](https://img.shields.io/badge/powered%20by-%20vercel-7116FB.svg?logo=vercel&style=for-the-badge)](https://vercel.com/)
 [![forthebadge](https://img.shields.io/badge/build%20with-%20%E2%9D%A4-B6FF9B.svg?logo=heart&style=for-the-badge)](https://forthebadge.com/)
+
 
   [repo]:           https://github.com/AlexRogalskiy/charts
   [tags]:           https://github.com/AlexRogalskiy/charts/tags

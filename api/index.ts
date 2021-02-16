@@ -9,11 +9,11 @@ export default async function render(req: NowRequest, res: NowResponse): Promise
         const width = toInt(toString(req.query.width))
         const height = toInt(toString(req.query.height))
 
-        const options = {width, height}
+        const options = { width, height }
 
         const chart = await chartRenderer({
             url,
-            options
+            options,
         })
 
         res.setHeader('Cache-Control', 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate')
@@ -27,7 +27,7 @@ export default async function render(req: NowRequest, res: NowResponse): Promise
         return res.send({
             status: 'Error',
             name: error.name,
-            message: error.message
+            message: error.message,
         })
     }
 }

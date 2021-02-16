@@ -1,10 +1,10 @@
 import { JSDOM, VirtualConsole } from 'jsdom'
+import { promises } from 'fs'
 
 import { ImageOptions, ParsedRequest } from '../typings/types'
 import { mergeProps, toFormatString, toJsonUrl, toUrl } from './commons'
 import { CONFIG } from './config'
 
-const fs = require('fs')
 const pathToPlotly = require.resolve('plotly.js-dist')
 
 export async function chartRenderer(parsedRequest: ParsedRequest): Promise<string | void> {
@@ -12,7 +12,8 @@ export async function chartRenderer(parsedRequest: ParsedRequest): Promise<strin
     const options: ImageOptions = mergeProps(CONFIG.imageOptions, parsedRequest.options)
 
     console.log(
-        `\n>>> Generating chart with parameters:
+        `
+        >>> Generating chart with parameters:
         url=${parsedRequest.url},
         options=${toFormatString(options)}
         `
@@ -34,7 +35,7 @@ const createVirtualConsole = (): VirtualConsole => {
 }
 
 const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
-    const jsDomWindow = new JSDOM('', {runScripts: 'dangerously', virtualConsole}).window
+    const jsDomWindow = new JSDOM('', { runScripts: 'dangerously', virtualConsole }).window
     jsDomWindow.HTMLCanvasElement.prototype.getContext = () => null
     jsDomWindow.URL.createObjectURL = () => null
 
@@ -42,7 +43,8 @@ const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
 }
 
 const createChart = async (url: unknown, options: ImageOptions, virtualWindow: JSDOM): Promise<string> => {
-    return await fs.promises.readFile(pathToPlotly, 'utf-8')
+    return await promises
+        .readFile(pathToPlotly, 'utf-8')
         .then(virtualWindow.eval)
         .then(() => virtualWindow.Plotly.toImage(url, options))
 }
