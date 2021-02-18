@@ -91,17 +91,6 @@ export const toInt = (str: string, defaultValue?: number): number | undefined =>
     }
 }
 
-export const pluck = <T, K extends keyof T>(o: T, propertyNames: K[]): T[K][] => {
-    return propertyNames.map(n => o[n])
-}
-
 export const mergeProps = <T>(...obj: unknown[]): T => {
     return _.mergeWith({}, ...obj, (o, s) => (_.isNull(s) ? o : s))
 }
-
-export const wait = async (ms: number, ...args: unknown[]): Promise<void> => {
-    new Promise(resolve => setTimeout(resolve, ms, args))
-}
-
-export const composeAsync = async (...funcs) => async x =>
-    await funcs.reduce((acc, val) => acc.then(val), Promise.resolve(x))
