@@ -2,13 +2,13 @@ import { JSDOM, VirtualConsole } from 'jsdom'
 import { promises } from 'fs'
 
 import { ImageOptions, ParsedRequest } from '../typings/types'
-import { mergeProps, toFormatString, toJsonUrl, toUrl } from './commons'
+import { fetchJsonUrl, mergeProps, toFormatString, toJsonUrl } from './commons'
 import { CONFIG } from './config'
 
 const pathToPlotly = require.resolve('plotly.js-dist')
 
 export async function chartRenderer(parsedRequest: ParsedRequest): Promise<string | void> {
-    const url = await toJsonUrl(toUrl(parsedRequest.url)).catch(console.error)
+    const url = await fetchJsonUrl(toJsonUrl(parsedRequest.url)).catch(console.error)
     const options: ImageOptions = mergeProps(CONFIG.imageOptions, parsedRequest.options)
 
     console.log(
@@ -19,8 +19,8 @@ export async function chartRenderer(parsedRequest: ParsedRequest): Promise<strin
         `
     )
 
-    const virtualConsole = createVirtualConsole()
-    const virtualWindow = createVirtualWindow(virtualConsole)
+    const virtualConsole: VirtualConsole = createVirtualConsole()
+    const virtualWindow: JSDOM = createVirtualWindow(virtualConsole)
 
     return await createChart(url, options, virtualWindow).catch(console.error)
 }
@@ -35,7 +35,7 @@ const createVirtualConsole = (): VirtualConsole => {
 }
 
 const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
-    const jsDomWindow = new JSDOM('', { runScripts: 'dangerously', virtualConsole }).window
+    const jsDomWindow = new JSDOM('', {runScripts: 'dangerously', virtualConsole}).window
     jsDomWindow.HTMLCanvasElement.prototype.getContext = () => null
     jsDomWindow.URL.createObjectURL = () => null
 

@@ -26,7 +26,7 @@ export const requireValidUrl = (str: string): string => {
     throw new Error(`Invalid URL: ${str}`)
 }
 
-export const toJsonUrl = async (url: RequestInfo): Promise<string> => {
+export const fetchJsonUrl = async (url: RequestInfo): Promise<string> => {
     return await fetch(url)
         .then(async response => response.json())
         .then(value => {
@@ -50,12 +50,16 @@ export const isBlankString = (str: string): boolean => {
     return !str || /^\s*$/.test(str)
 }
 
-export const toUrl = (str: string): string => {
+export const toJsonUrl = (str: string): string => {
     if (isBlankString(str)) throw Error('Source URL should not be blank or empty')
-    str = str.startsWith('http') ? str : `http://${str}`
-    str = str.endsWith('.json') ? str : `${str}.json`
+    str = withHttpUrl(str)
+    str = withJsonUrl(str)
     return str
 }
+
+export const withHttpUrl = (url: string): string => (!!url && !/^https?:\/\//i.test(url)) ? `http://${url}` : url;
+
+export const withJsonUrl = (url: string): string => (!!url && !/\.json$/i.test(url)) ? `${url}.json` : url;
 
 export const toFormatString = (obj): string => {
     return `(${objToString(obj)})`
