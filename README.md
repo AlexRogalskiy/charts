@@ -25,6 +25,7 @@
 [![NewReleases](https://newreleases.io/badge.svg)](https://newreleases.io/github/AlexRogalskiy/charts)
 [![Hits-of-Code](https://hitsofcode.com/github/AlexRogalskiy/charts)](https://hitsofcode.com/github/AlexRogalskiy/charts/view)
 [![ComVer](https://img.shields.io/badge/ComVer-compliant-brightgreen.svg)][tags]
+[![GitHub Super-Linter](https://github.com/AlexRogalskiy/charts/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 ## _Table of contents_
 
