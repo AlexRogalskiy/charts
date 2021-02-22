@@ -12,6 +12,7 @@
 ![GitHub search hit counter](https://img.shields.io/github/search/AlexRogalskiy/charts/goto)
 ![GitHub Repository branches](https://badgen.net/github/branches/AlexRogalskiy/charts)
 ![GitHub Repository dependents](https://badgen.net/github/dependents-repo/AlexRogalskiy/charts)
+[![Tokei](https://tokei.rs/b1/github/AlexRogalskiy/charts?category=lines)](https://github.com/XAMPPRocky/tokei)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/alexrogalskiy/charts/master/LICENSE?token=AH44ZFH7IF2KSEDK7LSIW3C7YOFYC)
 [![Issue](https://img.shields.io/github/issues/alexrogalskiy/charts)](https://img.shields.io/github/issues/alexrogalskiy/charts)
@@ -77,11 +78,11 @@ It's simple, you can copy paste this markdown content, like this one:
 
 There are several options you can use from the list:
 
-|  Options  | Description               |   Type                           | Example                | Query Params          | 
-| --------- | ------------------------- | -------------------------------- | ---------------------- | --------------------- |
-| Url       | Json data source url      | String url in json data format   | https://host/data.json | ```?url=[value]```    |
-| Width     | Chart graph image width   | Numeric image width              | 400                    | ```&width=[value]```  |
-| Height    | Chart graph image height  | Numeric image height             | 400                    | ```&height=[value]``` |
+|  **Options**  | **Description**           |   **Type**                       | **Example**            | **Query Params**      | 
+| ------------- | ------------------------- | -------------------------------- | ---------------------- | --------------------- |
+| **Url**       | Json data source url      | String url in json data format   | https://host/data.json | ```?url=[value]```    |
+| **Width**     | Chart graph image width   | Numeric image width              | 400                    | ```&width=[value]```  |
+| **Height**    | Chart graph image height  | Numeric image height             | 400                    | ```&height=[value]``` |
 
 ## _Example_
 
