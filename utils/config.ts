@@ -1,6 +1,6 @@
 import { ConfigOptions } from '../typings/types'
 
-export const CONFIG: ConfigOptions = {
+export const CONFIG: Readonly<ConfigOptions> = {
     imageOptions: {
         format: 'svg',
         imageDataOnly: true,
