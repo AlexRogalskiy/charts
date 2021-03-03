@@ -35,7 +35,7 @@ const createVirtualConsole = (): VirtualConsole => {
 }
 
 const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
-    const jsDomWindow = new JSDOM('', {runScripts: 'dangerously', virtualConsole}).window
+    const jsDomWindow = new JSDOM('', { runScripts: 'dangerously', virtualConsole }).window
     jsDomWindow.HTMLCanvasElement.prototype.getContext = () => null
     jsDomWindow.URL.createObjectURL = () => null
 

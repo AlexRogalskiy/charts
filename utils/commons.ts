@@ -57,9 +57,11 @@ export const toJsonUrl = (str: string): string => {
     return str
 }
 
-export const withHttpUrl = (url: string): string => (!!url && !/^https?:\/\//i.test(url)) ? `http://${url}` : url;
+export const withHttpUrl = (url: string): string =>
+    !!url && !/^https?:\/\//i.test(url) ? `http://${url}` : url
 
-export const withJsonUrl = (url: string): string => (!!url && !/\.json$/i.test(url)) ? `${url.replace(/\/$/, '')}.json` : url;
+export const withJsonUrl = (url: string): string =>
+    !!url && !/\.json$/i.test(url) ? `${url.replace(/\/$/, '')}.json` : url
 
 export const toFormatString = (obj): string => {
     return `(${objToString(obj)})`
