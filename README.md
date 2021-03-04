@@ -1,5 +1,7 @@
 # _Styled charts_
 
+> Generate SVG [styled charts](https://en.wikipedia.org/wiki/Chart)
+
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/AlexRogalskiy/charts)
 ![GitHub Release Date](https://img.shields.io/github/release-date/AlexRogalskiy/charts)
 ![Lines of code](https://tokei.rs/b1/github/AlexRogalskiy/charts?category=lines)
@@ -14,6 +16,7 @@
 ![GitHub Repository dependents](https://badgen.net/github/dependents-repo/AlexRogalskiy/charts)
 [![Tokei](https://tokei.rs/b1/github/AlexRogalskiy/charts?category=lines)](https://github.com/XAMPPRocky/tokei)
 ![Mergify Status](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/AlexRogalskiy/charts)
+[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/alexrogalskiy/charts/master/LICENSE?token=AH44ZFH7IF2KSEDK7LSIW3C7YOFYC)
 [![Issue](https://img.shields.io/github/issues/alexrogalskiy/charts)](https://img.shields.io/github/issues/alexrogalskiy/charts)
@@ -81,9 +84,9 @@ There are several options you can use from the list:
 
 |  **Options**  | **Description**           |   **Type**                       | **Example**            | **Query Params**      | 
 | ------------- | ------------------------- | -------------------------------- | ---------------------- | --------------------- |
-| **Url**       | Json data source url      | String url in json data format   | https://host/data.json | ```?url=[value]```    |
-| **Width**     | Chart graph image width   | Numeric image width              | 400                    | ```&width=[value]```  |
-| **Height**    | Chart graph image height  | Numeric image height             | 400                    | ```&height=[value]``` |
+| **[Url]**       | Json data source url      | <code>String</code>            | https://host/data.json | ```?url=[value]```    |
+| **[Width]**     | Chart graph image width   | <code>Numeric</code>           | 400                    | ```&width=[value]```  |
+| **[Height]**    | Chart graph image height  | <code>Numeric</code>           | 400                    | ```&height=[value]``` |
 
 ## _Example_
 
