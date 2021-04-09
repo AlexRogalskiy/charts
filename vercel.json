@@ -4,6 +4,17 @@
             "memory": 1024
         }
     },
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "access-control-allow-origin",
+                    "value": "*"
+                }
+            ]
+        }
+    ],
     "rewrites": [
         {
             "source": "/(.+)",
