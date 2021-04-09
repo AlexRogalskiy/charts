@@ -28,10 +28,10 @@ const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
 const createChart = async (data: string, options: ImageOptions, virtualWindow: JSDOM): Promise<string> => {
     boxenLogs(`>>> Generating screenshot with parameters: ${serialize(options)}`)
 
-    return await promises
-        .readFile(pathToPlotly, 'utf-8')
-        .then(virtualWindow.eval)
-        .then(() => virtualWindow.Plotly.toImage(data, options))
+    const plotlyFile = await promises.readFile(pathToPlotly, 'utf-8')
+    await virtualWindow.eval(plotlyFile)
+
+    return await virtualWindow.Plotly.toImage(data, options)
 }
 
 export async function chartRenderer(request: RequestData): Promise<Buffer | string | void> {

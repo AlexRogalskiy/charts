@@ -59,7 +59,6 @@
             "warn",
             "consistent-as-needed"
         ],
-        "github/no-then": "off",
         "no-console": "off",
         "no-shadow": "off",
         "no-alert": "error",

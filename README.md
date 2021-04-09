@@ -16,11 +16,11 @@
 ![GitHub Repository dependents](https://badgen.net/github/dependents-repo/AlexRogalskiy/charts)
 
 [![DeepSource](https://deepsource.io/gh/AlexRogalskiy/charts.svg/?label=active+issues\&show_trend=true)](https://deepsource.io/gh/AlexRogalskiy/charts/?ref=repository-badge)
-[![DeepScan grade](https://deepscan.io/api/teams/11946/projects/16620/branches/360082/badge/grade.svg)](https://deepscan.io/dashboard#view=project\&tid=11946\&pid=16620\&bid=360082)
+[![DeepScan grade](https://deepscan.io/api/teams/11946/projects/16629/branches/360779/badge/grade.svg)](https://deepscan.io/dashboard#view=project\&tid=11946\&pid=16629\&bid=360779)
 [![Tokei](https://tokei.rs/b1/github/AlexRogalskiy/charts?category=lines)](https://github.com/XAMPPRocky/tokei)
 ![Mergify Status](https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/AlexRogalskiy/charts)
 [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
-[![DOI](https://zenodo.org/badge/338610006.svg)](https://zenodo.org/badge/latestdoi/338610006)
+[![DOI](https://zenodo.org/badge/337395887.svg)](https://zenodo.org/badge/latestdoi/337395887)
 [![dependencies Status](https://status.david-dm.org/gh/AlexRogalskiy/charts.svg)](https://david-dm.org/AlexRogalskiy/charts)
 [![devDependencies Status](https://status.david-dm.org/gh/AlexRogalskiy/charts.svg)](https://david-dm.org/AlexRogalskiy/charts?type=dev)
 
@@ -29,7 +29,7 @@
 [![Forks](https://img.shields.io/github/forks/alexrogalskiy/charts)](https://img.shields.io/github/forks/alexrogalskiy/charts)
 [![Stars](https://img.shields.io/github/stars/alexrogalskiy/charts)](https://img.shields.io/github/stars/alexrogalskiy/charts)
 ![code style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
-[![Maintainability](https://api.codeclimate.com/v1/badges/ed7702f8cf28917829fa/maintainability)](https://codeclimate.com/github/AlexRogalskiy/charts/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5776836eae90fb638b75/maintainability)](https://codeclimate.com/github/AlexRogalskiy/charts/maintainability)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/AlexRogalskiy/charts.svg?logo=lgtm\&logoWidth=18)](https://lgtm.com/projects/g/AlexRogalskiy/charts/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/AlexRogalskiy/charts.svg?logo=lgtm\&logoWidth=18)](https://lgtm.com/projects/g/AlexRogalskiy/charts/context:javascript)
 
@@ -40,7 +40,7 @@
 [![ComVer](https://img.shields.io/badge/ComVer-compliant-brightgreen.svg)][tags]
 ![Website](https://img.shields.io/website?url=https://styled-charts.vercel.app/favicon.ico)
 
-[![codecov](https://codecov.io/gh/AlexRogalskiy/charts/branch/master/graph/badge.svg?token=wvWIJaRPKu)](https://codecov.io/gh/AlexRogalskiy/charts)
+[![codecov](https://codecov.io/gh/AlexRogalskiy/charts/branch/master/graph/badge.svg?token=VK8F8KBQZV)](https://codecov.io/gh/AlexRogalskiy/charts)
 [![CI](https://github.com/AlexRogalskiy/charts/workflows/CI/badge.svg)](https://github.com/AlexRogalskiy/charts/actions/workflows/build.yml)
 [![GitHub Super-Linter](https://github.com/AlexRogalskiy/charts/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![BCH compliance](https://bettercodehub.com/edge/badge/AlexRogalskiy/charts?branch=master)](https://bettercodehub.com/)

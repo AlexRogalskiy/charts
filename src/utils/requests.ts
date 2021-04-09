@@ -116,22 +116,6 @@ export const toBase64ImageUrl = async (request: RequestInfo): Promise<string> =>
     ).toString('base64')}`
 }
 
-// export const fetchJsonUrl = async (url: RequestInfo): Promise<string> => {
-//     return await fetch(url)
-//         .then(async response => response.json())
-//         .then(value => {
-//             if ('layout' in value) {
-//                 if ('height' in value.layout) {
-//                     value.layout.height = null
-//                 }
-//                 if ('width' in value.layout) {
-//                     value.layout.width = null
-//                 }
-//             }
-//             return value
-//         })
-// }
-
 export const toFormatUrl = (value: string, prefix = 'http', suffix = '.json'): string => {
     if (isBlankString(value)) throw new Error('Source URL should not be blank or empty')
     value = value.startsWith(prefix) ? value : `${prefix}://${value}`

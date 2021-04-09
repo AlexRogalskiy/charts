@@ -8,7 +8,7 @@ import { strToEnum } from '../utils/commons'
 /**
  * Image supported content types
  */
-export const IMAGE_CONTENT: Record<string, string> = strToEnum(['jpeg', 'png', 'svg'])
+export const IMAGE_CONTENT: Record<string, string> = strToEnum(['svg'])
 
 /**
  * Image supported content encoding types

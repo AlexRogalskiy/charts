@@ -1,7 +1,7 @@
 {
     "name": "styled-charts",
     "version": "0.0.0-dev",
-    "description": "Automatically generate styled charts (png, jpeg) upon request",
+    "description": "Automatically generate styled SVG charts upon request",
     "main": "api/index.ts",
     "license": "GPL-3.0",
     "scripts": {
