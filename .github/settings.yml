@@ -1,7 +1,7 @@
 # Repository settings set via https://github.com/probot/settings
 ---
 repository:
-  description: "styled-charts"
+  description: "charts"
   homepage: https://github.com/AlexRogalskiy/charts
   topics: web, documents, visualization
   private: false

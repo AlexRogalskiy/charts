@@ -1,4 +1,4 @@
-name: test
+name: CI
 
 on:
   push:
@@ -10,11 +10,17 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
+      max-parallel: 2
       matrix:
-        node: [ "12", "13", "14" ]
+        node: [ "13", "14", "15" ]
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -37,7 +43,16 @@ jobs:
         run: yarn install
 
       - name: Jest
-        run: yarn test
+        run: yarn test:all
 
-      - name: Lint
-        run: yarn lint
+      - name: Check
+        run: yarn check:all
+
+      - name: coverage
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: actions ${{ matrix.node }}
+          file: ./coverage/coverage-final.json
+          fail_ci_if_error: true
+          verbose: true
