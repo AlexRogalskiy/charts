@@ -15,6 +15,7 @@ export enum ProfilePattern {
  */
 export enum RoutePattern {
     default = 'default',
+    raw = 'raw',
 }
 
 //--------------------------------------------------------------------------------------------------

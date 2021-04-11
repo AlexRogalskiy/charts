@@ -25,7 +25,11 @@ export type RouteOptions = {
     /**
      * Route base url.
      */
-    readonly url: string
+    readonly url?: string
+    /**
+     * Route date.
+     */
+    readonly data?: string
 }
 
 //--------------------------------------------------------------------------------------------------

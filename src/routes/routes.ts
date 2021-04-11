@@ -3,6 +3,7 @@ import { RoutePattern } from '../../typings/enum-types'
 import { Optional } from '../../typings/standard-types'
 
 import { defaultController } from '../controllers/default.controller'
+import { rawController } from '../controllers/raw.controller'
 
 /**
  * RouteRecord
@@ -15,7 +16,8 @@ export type RouteRecord = Record<RoutePattern, RouteFunction>
  * @desc Type representing supported route mappings
  */
 const routes: Readonly<RouteRecord> = {
-    default: defaultController,
+    [RoutePattern.default]: defaultController,
+    [RoutePattern.raw]: rawController,
 }
 
 /**

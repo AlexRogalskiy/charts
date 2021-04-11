@@ -2,7 +2,7 @@ import { NowResponse } from '@vercel/node'
 
 import fetch from 'isomorphic-unfetch'
 
-import { Headers } from '../../typings/standard-types'
+import { Headers, Optional } from '../../typings/standard-types'
 
 import { ExtendableError, ResponseError } from '../errors/errors'
 import { errorLogs } from './loggers'
@@ -124,8 +124,8 @@ export const toFormatUrl = (value: string, prefix = 'http', suffix = '.json'): s
     return value
 }
 
-export const toJsonUrl = (value: string): string => {
-    if (isBlankString(value)) throw new Error('Source URL should not be blank or empty')
+export const toJsonUrl = (value: Optional<string>): string => {
+    if (!value || isBlankString(value)) throw new Error('Source URL should not be blank or empty')
     value = withHttpUrl(value)
     value = withJsonUrl(value)
 

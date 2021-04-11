@@ -1,4 +1,5 @@
 import { valueError } from '../errors/errors'
+import { Optional } from '../../typings/standard-types'
 
 export const getType = (obj: any): string => {
     return {}.toString
@@ -7,7 +8,7 @@ export const getType = (obj: any): string => {
         .toLowerCase()
 }
 
-export const isBlankString = (value: string): boolean => !value || /^\s*$/.test(value)
+export const isBlankString = (value: Optional<string>): boolean => !value || /^\s*$/.test(value)
 
 export const isNull = (value: any): boolean => {
     return value === null
