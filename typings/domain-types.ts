@@ -18,18 +18,25 @@ export type ImageContentType = Keys<typeof IMAGE_CONTENT>
 export type ImageEncodingType = Keys<typeof IMAGE_ENCODING>
 //--------------------------------------------------------------------------------------------------
 /**
- * RouteOptions
- * @desc Type representing route configuration options
+ * UrlDataOptions
+ * @desc Type representing url data configuration options
  */
-export type RouteOptions = {
+export type UrlDataOptions = {
     /**
-     * Route base url.
+     * Url data.
      */
-    readonly url?: string
+    readonly url: string
+}
+
+/**
+ * FileDataOptions
+ * @desc Type representing file data configuration options
+ */
+export type FileDataOptions = {
     /**
-     * Route date.
+     * File data.
      */
-    readonly data?: string
+    readonly file: string
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -115,11 +122,11 @@ export type RequestData = {
  * RequestOptions
  * @desc Type representing request configuration options
  */
-export type RequestOptions = {
+export type RequestOptions<T> = {
     /**
-     * Route configuration options.
+     * Source configuration options.
      */
-    readonly routeOptions: RouteOptions
+    readonly sourceOptions: T
     /**
      * Image configuration options.
      */
@@ -129,6 +136,18 @@ export type RequestOptions = {
      */
     readonly resourceOptions?: Partial<ResourceOptions>
 }
+
+/**
+ * UrlRequestOptions
+ * @desc Type representing url request configuration options
+ */
+export type UrlRequestOptions = RequestOptions<UrlDataOptions>
+
+/**
+ * FileRequestOptions
+ * @desc Type representing file request configuration options
+ */
+export type FileRequestOptions = RequestOptions<FileDataOptions>
 
 //--------------------------------------------------------------------------------------------------
 /**

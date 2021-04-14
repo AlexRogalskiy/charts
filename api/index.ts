@@ -1,4 +1,4 @@
-import { NowRequest, NowResponse, VercelResponse } from '@vercel/node/dist'
+import { NowRequest, NowResponse } from '@vercel/node/dist'
 
 import { RoutePattern } from '../typings/enum-types'
 
@@ -7,7 +7,7 @@ import { getRoute } from '../src/routes/routes'
 import { sendResponse } from '../src/utils/requests'
 import { single } from '../src/utils/commons'
 
-export default async function render(req: NowRequest, res: NowResponse): Promise<VercelResponse> {
+export default async function render(req: NowRequest, res: NowResponse): Promise<NowResponse | void> {
     try {
         const routePattern = RoutePattern[single(req.query.mode)]
 

@@ -3,17 +3,44 @@ import { NowResponse } from '@vercel/node'
 import fetch from 'isomorphic-unfetch'
 
 import { Headers, Optional } from '../../typings/standard-types'
+import { ResourceOptions } from '../../typings/domain-types'
 
 import { ExtendableError, ResponseError } from '../errors/errors'
+
 import { errorLogs } from './loggers'
+
 import { isBlankString, isFunction } from './validators'
 
-import { RESPONSE_HEADERS } from '../constants/constants'
+import { profile } from './profiles'
+
+import {
+    CONTENT_TYPE_OPTIONS,
+    LOCATION_OPTIONS,
+    RESOURCE_OPTIONS,
+    RESPONSE_HEADERS,
+} from '../constants/constants'
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports,@typescript-eslint/no-var-requires
 require('https').globalAgent.options.rejectUnauthorized = false
 
 export const getApiUrl = (baseUrl: string, query: string): string => `${baseUrl}?${query}`
+
+export const withHeaders = (res: NowResponse, resources: ResourceOptions): NowResponse => {
+    const { locationOptions, resourceOptions } = profile
+
+    const name = locationOptions?.name || LOCATION_OPTIONS.name
+    const type = resources.type || resourceOptions?.type || RESOURCE_OPTIONS.type
+    const encoding = resources.encoding || resourceOptions?.encoding || RESOURCE_OPTIONS.encoding
+
+    return setHeaders(res, {
+        ...RESPONSE_HEADERS,
+        ...{
+            'Content-Type': `${CONTENT_TYPE_OPTIONS[type]}`,
+            'Content-Transfer-Encoding': `${encoding}`,
+            'Content-Disposition': `attachment; filename="${name}.${type}"`,
+        },
+    })
+}
 
 export const sendResponse = (
     res: NowResponse,

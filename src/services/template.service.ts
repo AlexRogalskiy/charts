@@ -1,4 +1,10 @@
-import { ImageOptions, RequestData, RequestOptions, ResourceOptions } from '../../typings/domain-types'
+import {
+    FileRequestOptions,
+    ImageOptions,
+    RequestData,
+    ResourceOptions,
+    UrlRequestOptions,
+} from '../../typings/domain-types'
 
 import * as chartClient from '../clients/chart.client'
 
@@ -8,18 +14,34 @@ import { serialize } from '../utils/serializers'
 import { profile } from '../utils/profiles'
 import { boxenLogs } from '../utils/loggers'
 
-export async function templateRenderer(request: RequestOptions): Promise<Buffer | string | void> {
-    boxenLogs(` >>> Generating chart with request parameters: ${serialize(request)}`)
-
+const templateRenderer = async ({ data, image, resource }): Promise<Buffer | string | void> => {
     const { imageOptions, resourceOptions } = profile
-
-    const data = await fetchAsJson(toJsonUrl(request.routeOptions.url))
 
     const requestData: RequestData = {
         data,
-        imageOptions: mergeProps<ImageOptions>(imageOptions, request.imageOptions),
-        resourceOptions: mergeProps<ResourceOptions>(resourceOptions, request.resourceOptions),
+        imageOptions: mergeProps<ImageOptions>(imageOptions, image),
+        resourceOptions: mergeProps<ResourceOptions>(resourceOptions, resource),
     }
 
     return await chartClient.chartRenderer(requestData)
+}
+
+export async function fileTemplateRenderer(request: FileRequestOptions): Promise<Buffer | string | void> {
+    boxenLogs(` >>> Generating chart with request parameters: ${serialize(request)}`)
+
+    return await templateRenderer({
+        data: request.sourceOptions.file,
+        image: request.imageOptions,
+        resource: request.resourceOptions,
+    })
+}
+
+export async function urlTemplateRenderer(request: UrlRequestOptions): Promise<Buffer | string | void> {
+    boxenLogs(` >>> Generating chart with request parameters: ${serialize(request)}`)
+
+    return await templateRenderer({
+        data: await fetchAsJson(toJsonUrl(request.sourceOptions.url)),
+        image: request.imageOptions,
+        resource: request.resourceOptions,
+    })
 }

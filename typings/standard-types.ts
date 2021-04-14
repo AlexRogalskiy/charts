@@ -23,6 +23,12 @@ export type Keys<T> = keyof T
 export type KeyRecord<T extends PropertyKey> = { [K in T]: K }
 //--------------------------------------------------------------------------------------------------
 /**
+ * StringRecord
+ * @desc Type representing string record
+ */
+export type StringRecord<T extends PropertyKey> = Record<T, string>
+//--------------------------------------------------------------------------------------------------
+/**
  * Headers
  * @desc Type representing headers
  */

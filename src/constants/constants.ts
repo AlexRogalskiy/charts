@@ -1,19 +1,35 @@
 import boxen from 'boxen'
 
-import { ImageOptions, LocationOptions, ResourceOptions } from '../../typings/domain-types'
-import { Headers } from '../../typings/standard-types'
+import { ImageContentType, ImageOptions, LocationOptions, ResourceOptions } from '../../typings/domain-types'
+import { Headers, KeyRecord, StringRecord } from '../../typings/standard-types'
 
 import { strToEnum } from '../utils/commons'
 
 /**
+ * Supported content image types
+ * - 'jpeg'
+ * - 'png'
+ */
+const IMAGE_TYPES = ['svg'] as const
+
+/**
+ * Supported content image encodings
+ *  - 'base64'
+ *  - 'binary'
+ */
+const IMAGE_ENCODINGS = ['base64', 'binary'] as const
+
+/**
  * Image supported content types
  */
-export const IMAGE_CONTENT: Record<string, string> = strToEnum(['svg'])
+export const IMAGE_CONTENT: KeyRecord<typeof IMAGE_TYPES[number]> = strToEnum(Object.values(IMAGE_TYPES))
 
 /**
  * Image supported content encoding types
  */
-export const IMAGE_ENCODING: Record<string, string> = strToEnum(['base64', 'binary'])
+export const IMAGE_ENCODING: KeyRecord<typeof IMAGE_ENCODINGS[number]> = strToEnum(
+    Object.values(IMAGE_ENCODINGS)
+)
 
 /**
  * Output configuration options
@@ -42,6 +58,13 @@ export const IMAGE_OPTIONS: Readonly<ImageOptions> = {
     showLinks: true,
     height: 800,
     width: 800,
+}
+
+/**
+ * Content configuration options
+ */
+export const CONTENT_TYPE_OPTIONS: Readonly<StringRecord<ImageContentType>> = {
+    svg: 'image/svg+xml',
 }
 
 /**
