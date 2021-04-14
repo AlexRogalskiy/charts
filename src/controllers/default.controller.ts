@@ -1,5 +1,7 @@
 import { NowRequest, NowResponse } from '@vercel/node'
 
+import { ImageContentType, ImageEncodingType } from '../../typings/domain-types'
+
 import * as templateService from '../services/template.service'
 
 import { single, toInt } from '../utils/commons'
@@ -14,8 +16,8 @@ export async function defaultController(req: NowRequest, res: NowResponse): Prom
     const width = toInt(single(req.query.width))
     const height = toInt(single(req.query.height))
 
-    const type = IMAGE_CONTENT[single(req.query.type)]
-    const encoding = IMAGE_ENCODING[single(req.query.encoding)]
+    const type: ImageContentType = IMAGE_CONTENT[single(req.query.type)]
+    const encoding: ImageEncodingType = IMAGE_ENCODING[single(req.query.encoding)]
 
     const sourceOptions = { url }
     const imageOptions = { width, height }

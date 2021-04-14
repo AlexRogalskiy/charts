@@ -1,6 +1,8 @@
 import { NowRequest, NowResponse } from '@vercel/node'
 import { IncomingForm } from 'formidable'
 
+import { ImageContentType, ImageEncodingType } from '../../typings/domain-types'
+
 import * as templateService from '../services/template.service'
 
 import { requestError, responseError } from '../errors/errors'
@@ -30,8 +32,8 @@ export async function rawController(req: NowRequest, res: NowResponse): Promise<
                 const width = toInt(single(req.query.width))
                 const height = toInt(single(req.query.height))
 
-                const type = IMAGE_CONTENT[single(req.query.type)]
-                const encoding = IMAGE_ENCODING[single(req.query.encoding)]
+                const type: ImageContentType = IMAGE_CONTENT[single(req.query.type)]
+                const encoding: ImageEncodingType = IMAGE_ENCODING[single(req.query.encoding)]
 
                 const sourceOptions = { file }
                 const imageOptions = { width, height }
