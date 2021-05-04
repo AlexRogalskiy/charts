@@ -33,7 +33,7 @@
         "postpublish": "git push && git push --tags",
         "setup": "yarn",
         "semantic-release": "semantic-release",
-        "test": "env-cmd --silent -e test jest",
+        "test": "env-cmd --silent -e test jest --verbose --passWithNoTests --no-cache",
         "test:coverage": "env-cmd --silent -e test jest --collectCoverage --detectOpenHandles",
         "test:watch": "env-cmd --silent -e test jest --watch",
         "test:license": "license-checker --production --summary --unknown --onlyAllow=\"Apache-2.0;BSD;ISC;MIT;GPL-3.0;CC-BY-3.0;CC0-1.0;Unlicense;\"",
