@@ -45,7 +45,7 @@
     },
     "dependencies": {
         "env-cmd": "^10.1.0",
-        "formidable": "^1.2.2",
+        "formidable": "2.0.0-dev.20200131.2",
         "isomorphic-unfetch": "^3.1.0",
         "jest-canvas-mock": "^2.3.1",
         "jsdom": "^16.4.0",
