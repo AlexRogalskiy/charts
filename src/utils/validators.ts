@@ -1,5 +1,6 @@
-import { valueError } from '../errors/errors'
 import { Optional } from '../../typings/standard-types'
+
+import { valueError } from '../errors/errors'
 
 export const getType = (obj: any): string => {
     return {}.toString
@@ -41,7 +42,7 @@ export const isValidUrl = (str: string): boolean => {
     try {
         new URL(str)
         return true
-    } catch (error) {
+    } catch {
         return false
     }
 }

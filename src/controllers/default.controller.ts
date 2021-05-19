@@ -1,4 +1,4 @@
-import { NowRequest, NowResponse } from '@vercel/node'
+import { VercelRequest, VercelResponse } from '@vercel/node'
 
 import { ImageContentType, ImageEncodingType } from '../../typings/domain-types'
 
@@ -10,7 +10,7 @@ import { requireValidUrl } from '../utils/validators'
 
 import { IMAGE_CONTENT, IMAGE_ENCODING } from '../constants/constants'
 
-export async function defaultController(req: NowRequest, res: NowResponse): Promise<NowResponse> {
+export async function defaultController(req: VercelRequest, res: VercelResponse): Promise<VercelResponse> {
     const url = requireValidUrl(single(req.query.url))
 
     const width = toInt(single(req.query.width))

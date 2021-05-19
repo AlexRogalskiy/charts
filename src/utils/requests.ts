@@ -1,4 +1,4 @@
-import { NowResponse } from '@vercel/node'
+import { VercelResponse } from '@vercel/node'
 
 import fetch from 'isomorphic-unfetch'
 
@@ -25,7 +25,7 @@ require('https').globalAgent.options.rejectUnauthorized = false
 
 export const getApiUrl = (baseUrl: string, query: string): string => `${baseUrl}?${query}`
 
-export const withHeaders = (res: NowResponse, resources: ResourceOptions): NowResponse => {
+export const withHeaders = (res: VercelResponse, resources: ResourceOptions): VercelResponse => {
     const { locationOptions, resourceOptions } = profile
 
     const name = locationOptions?.name || LOCATION_OPTIONS.name
@@ -43,9 +43,9 @@ export const withHeaders = (res: NowResponse, resources: ResourceOptions): NowRe
 }
 
 export const sendResponse = (
-    res: NowResponse,
+    res: VercelResponse,
     { data, type, message, timestamp }: ExtendableError
-): NowResponse => {
+): VercelResponse => {
     return res.status(data.code).send({
         type,
         code: data.code,

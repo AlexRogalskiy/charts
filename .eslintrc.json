@@ -82,6 +82,12 @@
         "unicorn/filename-case": "off",
         "unicorn/prevent-abbreviations": "off",
         "unicorn/no-nested-ternary": "off",
+        "unicorn/prefer-node-protocol": "off",
+        "unicorn/prefer-number-properties": "off",
+        "unicorn/prefer-module": "off",
+        "unicorn/no-object-as-default-parameter": "off",
+        "unicorn/no-array-reduce": "off",
+        "unicorn/no-new-array": "off",
         "spellcheck/spell-checker": [
             "off",
             {

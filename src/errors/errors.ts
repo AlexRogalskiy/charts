@@ -1,7 +1,7 @@
+import { ErrorType, StatusCode } from '../../typings/enum-types'
+
 import { hasProperty } from '../utils/commons'
 import { errorLogs } from '../utils/loggers'
-
-import { ErrorType, StatusCode } from '../../typings/enum-types'
 
 /**
  * ErrorData
@@ -54,7 +54,7 @@ export class ExtendableError extends Error {
     /**
      * Error timestamp
      */
-    readonly timestamp = new Date().getTime()
+    readonly timestamp = Date.now()
 
     /**
      * Extendable error constructor by input parameters
