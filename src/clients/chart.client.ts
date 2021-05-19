@@ -18,10 +18,11 @@ const createVirtualConsole = (): VirtualConsole => {
 }
 
 const createVirtualWindow = (virtualConsole: VirtualConsole): JSDOM => {
-    // window.HTMLCanvasElement.prototype.getContext = () => null
-    // window.URL.createObjectURL = () => null
+    const window = new JSDOM('', { runScripts: 'dangerously', virtualConsole }).window
+    // window.HTMLCanvasElement.prototype.getContext = () => undefined
+    window.URL.createObjectURL = () => {}
 
-    return new JSDOM('', { runScripts: 'dangerously', virtualConsole }).window
+    return window
 }
 
 const createChart = async (data: string, options: ImageOptions, virtualWindow: JSDOM): Promise<string> => {
