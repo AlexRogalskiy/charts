@@ -10,6 +10,7 @@ module.exports = {
     transform: {
         '^.+\\.(ts)$': 'ts-jest',
     },
+    setupFilesAfterEnv: ['jest-canvas-mock'],
     collectCoverage: true,
     collectCoverageFrom: [
         '**/*.ts',
