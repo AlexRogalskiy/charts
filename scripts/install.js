@@ -7,12 +7,9 @@ const { spawn } = require('child_process');
 const exec = util.promisify(require('child_process').exec);
 const execFile = util.promisify(require('child_process').execFile);
 
-const isWindowsOS = process.platform === 'win32'
+const isWindowsOS = process.platform.startsWith('win')
+const npm = isWindowsOS ? 'npm.cmd' : 'npm'
 
-// await spawnAsync('npm', ['--loglevel', 'warn', 'pack'], {
-//     stdio: 'inherit',
-//     cwd: builderPath,
-// });
 const spawnAsync = async (command, options = {}) => {
     return await new Promise((resolve, reject) => {
         const child = spawn(command, options)
@@ -66,8 +63,13 @@ async function getNodeVersion() {
 }
 
 async function getNpmVersion() {
-    const npmVersion = await spawnAsync(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['version']);
+    const npmVersion = await spawnAsync(npm, ['version']);
     console.log('npm version:', npmVersion)
+}
+
+async function getNpmDepsList() {
+    const npmVersion = await spawnAsync(npm, ['ls', '--json']);
+    console.log('npm dependencies list:', npmVersion)
 }
 
 async function runCommands() {
@@ -75,6 +77,7 @@ async function runCommands() {
     await getNpmVersion();
     await getProcessList();
     await getDirectoryList();
+    await getNpmDepsList();
 
     //await installDependencies();
 
