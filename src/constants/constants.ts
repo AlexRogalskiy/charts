@@ -85,7 +85,6 @@ export const RESPONSE_HEADERS: Readonly<Headers> = {
     'Access-Control-Allow-Headers':
         'Origin, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
     'Cache-Control': 'no-cache,max-age=0,no-store,s-maxage=0,proxy-revalidate',
-    'Content-Type': 'application/json',
     'Pragma': 'no-cache',
     'Expires': '-1',
     'X-Powered-By': 'Vercel',

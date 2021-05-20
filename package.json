@@ -36,6 +36,7 @@
         "postpublish": "git push && git push --tags",
         "setup": "yarn",
         "semantic-release": "semantic-release",
+        "gitlog": "node ./scripts/changelog.js",
         "test": "env-cmd --silent -e test jest --verbose --passWithNoTests --no-cache",
         "test:coverage": "env-cmd --silent -e test jest --collectCoverage --detectOpenHandles",
         "test:watch": "env-cmd --silent -e test jest --watch",

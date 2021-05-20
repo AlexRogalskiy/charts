@@ -7,17 +7,17 @@ import * as templateService from '../services/template.service'
 
 import { requestError, responseError } from '../errors/errors'
 
-import { single, toInt } from '../utils/commons'
+import { mergeProps, single, toInt } from '../utils/commons'
 import { sendResponse, setHeaders, withHeaders } from '../utils/requests'
 import { deserialize, serialize } from '../utils/serializers'
 
-import { IMAGE_CONTENT, IMAGE_ENCODING } from '../constants/constants'
+import { IMAGE_CONTENT, IMAGE_ENCODING, RESPONSE_HEADERS } from '../constants/constants'
 
 export async function rawController(req: VercelRequest, res: VercelResponse): Promise<VercelResponse | void> {
     const form = new formidable.IncomingForm()
 
     form.parse(req, async (err, fields): Promise<VercelResponse> => {
-        setHeaders(res)
+        setHeaders(res, mergeProps(RESPONSE_HEADERS, { 'Content-Type': 'application/json' }))
 
         if (err) {
             return sendResponse(res, responseError(err.message))

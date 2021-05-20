@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const util = require('util');
 
 const exec = util.promisify(require('child_process').exec);
@@ -7,7 +9,7 @@ const isWindowsOS = process.platform === 'win32'
 
 async function installDependencies() {
     if (!isWindowsOS) {
-        const { stdout, stderr } = await exec('apt-get install libuuid1');
+        const { stdout, stderr } = await exec('apk add libuuid1');
         console.log('dependencies logs:', stdout);
         console.error('dependencies errors:', stderr);
     }
@@ -36,7 +38,7 @@ async function runCommands() {
     await getNodeVersion();
     await getProcessList();
     await getDirectoryList();
-    await installDependencies();
+    //await installDependencies();
 }
 
 runCommands();
