@@ -2,10 +2,41 @@
 
 const util = require('util');
 
+const { spawn } = require('child_process');
+
 const exec = util.promisify(require('child_process').exec);
 const execFile = util.promisify(require('child_process').execFile);
 
 const isWindowsOS = process.platform === 'win32'
+
+// await spawnAsync('npm', ['--loglevel', 'warn', 'pack'], {
+//     stdio: 'inherit',
+//     cwd: builderPath,
+// });
+const spawnAsync = async (command, options = {}) => {
+    return await new Promise((resolve, reject) => {
+        const child = spawn(command, options)
+
+        let result
+        if (child.stdout) {
+            result = ''
+            child.stdout.on('data', chunk => {
+                result += chunk.toString()
+            })
+        }
+
+        child.on('error', reject)
+
+        child.on('close', (code, signal) => {
+            if (code !== 0) {
+                if (result) console.log(result)
+                reject(new Error(`Exited with ${code || signal}`))
+                return
+            }
+            resolve(result)
+        })
+    })
+}
 
 async function installDependencies() {
     if (!isWindowsOS) {
@@ -34,11 +65,19 @@ async function getNodeVersion() {
     console.log('node version:', stdout);
 }
 
+async function getNpmVersion() {
+    const npmVersion = await spawnAsync(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['version']);
+    console.log('npm version:', npmVersion)
+}
+
 async function runCommands() {
     await getNodeVersion();
+    await getNpmVersion();
     await getProcessList();
     await getDirectoryList();
+
     //await installDependencies();
+
 }
 
 runCommands();
