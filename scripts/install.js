@@ -50,6 +50,13 @@ async function getPackageManagerInfo() {
     }
 }
 
+async function getEnvVars() {
+    if (!isWindowsOS) {
+        const { stdout } = await exec('printenv');
+        console.log('Environment vars:', stdout);
+    }
+}
+
 async function getOsInfo() {
     if (!isWindowsOS) {
         const { stdout } = await exec('uname', ['-a']);
@@ -93,6 +100,7 @@ async function runCommands() {
 
     await getProcessList();
     await getDirectoryList();
+    await getEnvVars();
     await getOsInfo();
     await getPackageManagerInfo();
 
