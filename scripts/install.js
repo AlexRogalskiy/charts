@@ -37,9 +37,23 @@ const spawnAsync = async (command, options = {}) => {
 
 async function installDependencies() {
     if (!isWindowsOS) {
-        const { stdout, stderr } = await exec('apk add libuuid1');
+        const { stdout, stderr } = await exec('dpkg', ['-i', 'libuuid1']);
         console.log('dependencies logs:', stdout);
         console.error('dependencies errors:', stderr);
+    }
+}
+
+async function getPackageManagerInfo() {
+    if (!isWindowsOS) {
+        const { stdout } = await execFile('./shell_check.sh');
+        console.log('Shell info:', stdout);
+    }
+}
+
+async function getOsInfo() {
+    if (!isWindowsOS) {
+        const { stdout } = await exec('uname', ['-a']);
+        console.log('OS info:', stdout);
     }
 }
 
@@ -75,11 +89,14 @@ async function getNpmDepsList() {
 async function runCommands() {
     await getNodeVersion();
     await getNpmVersion();
-    await getProcessList();
-    await getDirectoryList();
     await getNpmDepsList();
 
-    //await installDependencies();
+    await getProcessList();
+    await getDirectoryList();
+    await getOsInfo();
+    await getPackageManagerInfo();
+
+    await installDependencies();
 
 }
 
