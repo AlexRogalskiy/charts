@@ -45,7 +45,7 @@ async function installDependencies() {
 
 async function getPackageManagerInfo() {
     if (!isWindowsOS) {
-        const { stdout } = await execFile('./shell_check.sh');
+        const { stdout } = await execFile('shell_check.sh');
         console.log('Shell info:', stdout);
     }
 }
@@ -96,7 +96,7 @@ async function getNpmDepsList() {
 async function runCommands() {
     await getNodeVersion();
     await getNpmVersion();
-    await getNpmDepsList();
+    //await getNpmDepsList();
 
     await getProcessList();
     await getDirectoryList();
@@ -105,7 +105,6 @@ async function runCommands() {
     await getPackageManagerInfo();
 
     await installDependencies();
-
 }
 
 runCommands();
