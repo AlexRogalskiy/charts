@@ -102,7 +102,7 @@ async function runCommands() {
     await getDirectoryList();
     await getEnvVars();
     await getOsInfo();
-    await getPackageManagerInfo();
+    //await getPackageManagerInfo();
 
     await installDependencies();
 }
