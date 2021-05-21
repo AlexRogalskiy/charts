@@ -37,7 +37,7 @@ const spawnAsync = async (command, options = {}) => {
 
 async function installDependencies() {
     if (!isWindowsOS) {
-        const { stdout, stderr } = await exec('yum -y install libuuid1');
+        const { stdout, stderr } = await exec('sudo yum -y install libuuid1');
         console.log('dependencies logs:', stdout);
         console.error('dependencies errors:', stderr);
     }
