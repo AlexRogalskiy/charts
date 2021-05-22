@@ -37,7 +37,7 @@ const spawnAsync = async (command, options = {}) => {
 
 async function installDependencies() {
     if (!isWindowsOS) {
-        const { stdout, stderr } = await exec('sudo yum -y install libuuid1');
+        const { stdout, stderr } = await exec('yum -y install libuuid1');
         console.log('dependencies logs:', stdout);
         console.error('dependencies errors:', stderr);
     }
@@ -104,9 +104,9 @@ async function runCommands() {
     await getOsInfo();
     //await getPackageManagerInfo();
 
-    if (process.env.AWS_LAMBDA_FUNCTION_VERSION || process.env.AWS_EXECUTION_ENV) {
-        await installDependencies();
-    }
+    //if (process.env.AWS_LAMBDA_FUNCTION_VERSION || process.env.AWS_EXECUTION_ENV) {
+    //    await installDependencies();
+    //}
 }
 
 runCommands();
