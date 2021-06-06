@@ -5,33 +5,45 @@ ARG IMAGE_TAG=lts-alpine
 
 FROM $IMAGE_SOURCE:$IMAGE_TAG
 
-MAINTAINER Alexander Rogalskiy <@AlexRogalskiy>
+MAINTAINER Alexander Rogalskiy <github@AlexRogalskiy>
 
-## Setting arguments
+## General arguments
+ARG LC_ALL="en_US.UTF-8"
 ARG VERSION="0.0.0-dev"
-ARG VCS_REF="$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
 ARG BUILD_DATE="$(git rev-parse --short HEAD)"
-ARG HOME_DIR="/usr/src/app"
+ARG VCS_REF="$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
 
 ## Vercel token
 ARG TOKEN
 
-## Setting metadata
-LABEL version=$VERSION
-LABEL vcs-ref=$VCS_REF
-LABEL build-date=$BUILD_DATE
+## Working directories
+ARG APP_DIR="/usr/src/app"
+ARG DATA_DIR="/usr/src/data"
 
-LABEL name="Styled charts"
-LABEL description="Automatically generate styled SVG charts upon request"
-LABEL repository="https://github.com/AlexRogalskiy/charts"
-LABEL homepage="https://github.com/AlexRogalskiy"
-LABEL maintainer="Nullables, Inc. <hello@nullables.io> (https://nullables.io)"
+## General metadata
+LABEL "com.github.repository"="https://github.com/AlexRogalskiy/charts"
+LABEL "com.github.homepage"="https://github.com/AlexRogalskiy/charts"
+LABEL "com.github.maintainer"="Sensiblemetrics, Inc. <hello@sensiblemetrics.io> (https://sensiblemetrics.io)"
+
+LABEL "com.github.version"="$VERSION"
+LABEL "com.github.build-date"="$BUILD_DATE"
+LABEL "com.github.vcs-ref"="$VCS_REF"
+
+LABEL "com.github.name"="styled-charts"
+LABEL "com.github.description"="Automatically generate styled SVG charts upon request"
 
 ## Setting environment variables
-ENV HOME $HOME_DIR
-ENV LC_ALL en_US.UTF-8
+ENV APP_DIR $APP_DIR
+ENV DATA_DIR $DATA_DIR
+ENV LC_ALL $LC_ALL
 ENV LANG $LC_ALL
 ENV VERCEL_TOKEN $TOKEN
+
+## Mounting volumes
+VOLUME ["$APP_DIR"]
+
+## Creating work directory
+WORKDIR $APP_DIR
 
 ## Installing dependencies
 RUN apk add --no-cache git
@@ -39,12 +51,12 @@ RUN apk add --no-cache git
 ## Installing vercel
 RUN npm i -g vercel
 
-## Creating work directory
-WORKDIR $HOME
-
 ## Copying project sources
 COPY .vercel*/ ./.vercel
 COPY api/ ./api
+COPY data/ ./data
+COPY fonts/ ./fonts
+COPY scripts/ ./scripts
 COPY src/ ./src
 COPY typings/ ./typings
 
@@ -55,6 +67,10 @@ COPY package.json .
 
 ## Installing project dependencies
 RUN npm install
+
+## Run format checking & linting
+RUN npm run all
+
 RUN yes | vercel --confirm --token $VERCEL_TOKEN
 
 ## Setting volumes
@@ -64,4 +80,4 @@ VOLUME /tmp
 EXPOSE 3000
 
 ## Running package bundle
-CMD ["npm", "run", "develop:docker"]
+CMD ["npm", "run", "development:docker"]
