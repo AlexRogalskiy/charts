@@ -3,7 +3,7 @@ import { Optional } from '../../typings/standard-types'
 import { valueError } from '../errors/errors'
 
 export const getType = (obj: any): string => {
-    return {}.toString
+    return Object.prototype.toString
         .call(obj)
         .match(/\s(\w+)/)[1]
         .toLowerCase()

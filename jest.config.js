@@ -29,13 +29,7 @@ module.exports = {
             functions: 4,
             lines: 4,
             statements: 4,
-        },
-        './src/**/*.ts': {
-            branches: 0,
-            functions: 0,
-            lines: 0,
-            statements: 0,
-        },
+        }
     },
     coverageDirectory: './coverage',
     coverageReporters: ['json', 'lcov', 'text', 'clover', 'html'],
