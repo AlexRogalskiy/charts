@@ -24,12 +24,12 @@ module.exports = {
         '!**/redirects/**',
     ],
     coverageThreshold: {
-        'global': {
+        global: {
             branches: 4,
             functions: 4,
             lines: 4,
             statements: 4,
-        }
+        },
     },
     coverageDirectory: './coverage',
     coverageReporters: ['json', 'lcov', 'text', 'clover', 'html'],
