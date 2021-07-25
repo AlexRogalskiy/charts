@@ -16,7 +16,7 @@ local_resource(
 
 # Add a live_update rule to our docker_build
 congrats = "🎉 Congrats, you ran a live_update! 🎉"
-docker_build_with_restart('styled-charts', '.', build_args={'IMAGE_SOURCE': 'node', 'IMAGE_TAG': 'lts-alpine'},
+docker_build_with_restart('styled-charts', '.', build_args={'IMAGE_SOURCE': 'node', 'IMAGE_TAG': '12-buster'},
     dockerfile='./Dockerfile',
     entrypoint=['npm', 'run', 'development:docker'],
     live_update=[
