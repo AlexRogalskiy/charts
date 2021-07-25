@@ -1,5 +1,5 @@
 ## Setting base OS layer
-## docker build -t container_tag --build-arg IMAGE_SOURCE=node IMAGE_TAG=lts-alpine .
+## docker build -t container_tag --build-arg IMAGE_SOURCE=node IMAGE_TAG=lts-alpine --build-arg TOKEN=<token> .
 ARG IMAGE_SOURCE=node
 ARG IMAGE_TAG=12-buster
 
@@ -103,17 +103,7 @@ RUN cd /tmp && curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Pytho
 RUN npm i -g vercel
 
 ## Copying project sources
-COPY .vercel*/ ./.vercel
-COPY api/ ./api
-COPY scripts/ ./scripts
-COPY src/ ./src
-COPY typings/ ./typings
-COPY tests/ ./tests
-
-COPY favicon.ico .
-COPY .env-cmdrc.json .
-COPY vercel.json .
-COPY package.json .
+COPY . ./
 
 ## Removing unnecessary dependencies
 RUN rm -rf /var/cache/apt/* /tmp/Python-${PYTHON_VERSION}
