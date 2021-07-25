@@ -29,13 +29,18 @@
     },
     "packageRules": [
         {
+            "depTypeList": [
+                "devDependencies",
+                "dependencies"
+            ],
             "updateTypes": [
                 "minor",
                 "patch",
                 "pin",
                 "digest"
             ],
-            "automerge": true
+            "automerge": true,
+            "automergeType": "branch"
         }
     ],
     "masterIssue": true,

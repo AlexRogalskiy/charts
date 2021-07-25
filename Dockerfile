@@ -8,6 +8,10 @@ FROM $IMAGE_SOURCE:$IMAGE_TAG
 ## General arguments
 ARG PYTHON_VERSION=3.8.2
 
+ARG USER="cukebot"
+ARG UID=5000
+ARG GID=10000
+
 ARG LC_ALL="en_US.UTF-8"
 ARG VERSION="0.0.0-dev"
 ARG BUILD_DATE="$(git rev-parse --short HEAD)"
@@ -58,14 +62,34 @@ ENV TZ=UTC \
 
 ENV VERCEL_TOKEN $TOKEN
 
+ENV USER=$USER \
+    UID=$UID \
+    GID=$GID
+
 ## Mounting volumes
 VOLUME ["$APP_DIR"]
 
 ## Creating work directory
 WORKDIR $APP_DIR
 
+# Create a cukebot user. Some tools (Bundler, npm publish) don't work properly
+# when run as root
+RUN addgroup --gid "$GID" "$USER" \
+    && adduser \
+    --disabled-password \
+    --gecos "" \
+    --ingroup "$USER" \
+    --uid "$UID" \
+    --shell /bin/bash \
+    "$USER"
+
 ## Installing dependencies
-RUN apk add --no-cache git curl
+RUN apt-get update \
+    && apt-get install --assume-yes \
+    git \
+    curl \
+    locales \
+    && apt-get clean
 
 ## Installing python
 RUN cd /tmp && curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz && \
@@ -92,7 +116,6 @@ COPY vercel.json .
 COPY package.json .
 
 ## Removing unnecessary dependencies
-RUN apt remove -y build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev libbz2-dev g++ python-pip python-dev
 RUN rm -rf /var/cache/apt/* /tmp/Python-${PYTHON_VERSION}
 
 ## Show versions
@@ -110,6 +133,9 @@ RUN yes | vercel --confirm --token $VERCEL_TOKEN
 
 ## Setting volumes
 VOLUME /tmp
+
+## Setting user
+USER $USER
 
 ## Exposing ports
 EXPOSE 3000
