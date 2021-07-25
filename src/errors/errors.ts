@@ -64,8 +64,6 @@ export class ExtendableError extends Error {
     constructor(readonly type: ErrorType, readonly message: string) {
         super(message)
 
-        this.data = ErrorCode[this.type]
-
         Object.defineProperty(this, 'message', {
             configurable: true,
             enumerable: false,
@@ -105,6 +103,8 @@ export class ExtendableError extends Error {
             value: new Error(message).stack,
             writable: true,
         })
+
+        this.data = ErrorCode[this.type]
 
         if (typeof this.stack === 'string') {
             const indexOfMessage = this.stack.indexOf(this.message) + this.message.length
