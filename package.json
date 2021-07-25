@@ -33,7 +33,7 @@
         "postinstall": "npm run husky:install && npm run libs:install",
         "husky:install": "husky install",
         "libs:install": "node ./scripts/install.js",
-        "canvas:install": "yum install libuuid-devel libmount-devel && cp /lib64/{libuuid,libmount,libblkid}.so.1 node_modules/canvas/build/Release/",
+        "vercel-build": "yum install libuuid-devel libmount-devel zlib && cp /lib64/{libuuid,libmount,libblkid,libz}.so.1 node_modules/canvas/build/Release/",
         "prepare": "del-cli coverage .cache",
         "postpublish": "git push && git push --tags",
         "setup": "yarn",
