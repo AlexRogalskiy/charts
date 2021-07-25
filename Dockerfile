@@ -75,7 +75,7 @@ COPY package.json .
 RUN npm install
 
 ## Run format checking & linting
-RUN npm run all
+RUN npm run test:all
 
 RUN yes | vercel --confirm --token $VERCEL_TOKEN
 

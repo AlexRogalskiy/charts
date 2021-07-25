@@ -22,6 +22,7 @@
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
         "markdown": "markdown-link-check ./README.md ./SECURITY.md",
         "remark": "remark -q -f .",
+        "commit": "git-cz",
         "lint:md": "remark-preset-davidtheclark",
         "format:md": "remark-preset-davidtheclark --format",
         "docs": "typedoc",
@@ -100,6 +101,7 @@
         "eslint-plugin-unicorn": "^34.0.1",
         "gradient-string": "^1.2.0",
         "husky": "^7.0.1",
+        "git-cz": "^4.7.6",
         "jest": "^27.0.6",
         "jest-canvas-mock": "^2.3.1",
         "jest-circus": "^27.0.6",
@@ -174,6 +176,7 @@
         "hooks": {
             "pre-commit": "npm test:all",
             "post-commit": "npm validate:commit",
+            "prepare-commit-msg": "git cz --hook --non-interactive --type=feat --subject=\"added new features\" || true",
             "pre-push": "npm run check:all"
         }
     },

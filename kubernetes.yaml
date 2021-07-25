@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: styled-charts
+  labels:
+    app: styled-charts
+spec:
+  selector:
+    matchLabels:
+      app: styled-charts
+  template:
+    metadata:
+      labels:
+        app: styled-charts
+    spec:
+      containers:
+        - name: styled-charts
+          image: styled-charts
+          ports:
+            - containerPort: 3000
