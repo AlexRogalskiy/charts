@@ -2,8 +2,9 @@ version: '3.9'
 
 services:
   app:
-    container_name: styled-charts
-    hostname: '$APP_HOSTNAME'
+    container_name: ${APP_CONTAINER_NAME:-'styled-charts'}
+    image: ${APP_IMAGE_NAME:-'styled-charts'}
+    hostname: ${APP_HOST_NAME:-'styled-charts'}
     build:
       context: './'
       dockerfile: Dockerfile
@@ -18,7 +19,7 @@ services:
         source: ./data
         target: /usr/src/data
     healthcheck:
-      test: ['CMD-SHELL', 'nc', '-vz', 'localhost', '3000']
+      test: [ 'CMD-SHELL', 'nc', '-vz', 'localhost', '3000' ]
       interval: 3s
       retries: 15
       start_period: 30s

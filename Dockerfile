@@ -5,13 +5,15 @@ ARG IMAGE_TAG=lts-alpine
 
 FROM $IMAGE_SOURCE:$IMAGE_TAG
 
-MAINTAINER Alexander Rogalskiy <github@AlexRogalskiy>
-
 ## General arguments
 ARG LC_ALL="en_US.UTF-8"
 ARG VERSION="0.0.0-dev"
 ARG BUILD_DATE="$(git rev-parse --short HEAD)"
 ARG VCS_REF="$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
+
+ARG NAME="styled-charts"
+ARG VERSION="0.0.0-dev"
+ARG DESCRIPTION="Automatically generate styled SVG charts upon request"
 
 ## Vercel token
 ARG TOKEN
@@ -20,7 +22,11 @@ ARG TOKEN
 ARG APP_DIR="/usr/src/app"
 ARG DATA_DIR="/usr/src/data"
 
-## General metadata
+## ## General metadata
+LABEL "name"="$NAME"
+LABEL "version"="$VERSION"
+LABEL "description"="$DESCRIPTION"
+
 LABEL "com.github.repository"="https://github.com/AlexRogalskiy/charts"
 LABEL "com.github.homepage"="https://github.com/AlexRogalskiy/charts"
 LABEL "com.github.maintainer"="Sensiblemetrics, Inc. <hello@sensiblemetrics.io> (https://sensiblemetrics.io)"
@@ -29,8 +35,8 @@ LABEL "com.github.version"="$VERSION"
 LABEL "com.github.build-date"="$BUILD_DATE"
 LABEL "com.github.vcs-ref"="$VCS_REF"
 
-LABEL "com.github.name"="styled-charts"
-LABEL "com.github.description"="Automatically generate styled SVG charts upon request"
+LABEL "com.github.name"="$NAME"
+LABEL "com.github.description"="$DESCRIPTION"
 
 ## Setting environment variables
 ENV APP_DIR $APP_DIR
