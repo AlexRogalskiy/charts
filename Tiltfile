@@ -3,6 +3,16 @@
 # For more on Extensions, see: https://docs.tilt.dev/extensions.html
 load('ext://restart_process', 'docker_build_with_restart')
 load('ext://conftest', 'conftest')
+load('ext://list_port_forwards', 'display_port_forwards')
+load('ext://print_tiltfile_dir', 'print_tiltfile_dir')
+load('ext://min_tilt_version', 'min_tilt_version')
+min_tilt_version('0.13.0')
+
+load('ext://tilt_inspector', 'tilt_inspector')
+tilt_inspector()
+
+#load('ext://min_k8s_version', 'min_k8s_version')
+#min_k8s_version('1.21.1')
 
 conftest(path='k8s/deployment.yaml', namespace='main')
 k8s_yaml('k8s/deployment.yaml')
