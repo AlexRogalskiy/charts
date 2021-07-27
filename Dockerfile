@@ -131,4 +131,4 @@ USER $USER
 EXPOSE 3000
 
 ## Running package bundle
-CMD ["npm", "run", "development:docker"]
+CMD ["npm", "run", "develop:docker"]
