@@ -4,6 +4,16 @@
       "Name": "restart_process",
       "ExtensionRegistry": "https://github.com/tilt-dev/tilt-extensions",
       "TimeFetched": "2021-07-26T00:13:12.0686102+03:00"
+    },
+    {
+      "Name": "conftest",
+      "ExtensionRegistry": "https://github.com/tilt-dev/tilt-extensions",
+      "TimeFetched": "2021-07-27T13:31:44.3192094+03:00"
+    },
+    {
+      "Name": "cancel",
+      "ExtensionRegistry": "https://github.com/tilt-dev/tilt-extensions",
+      "TimeFetched": "2021-07-27T13:31:54.3826282+03:00"
     }
   ]
 }
