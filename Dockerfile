@@ -28,7 +28,7 @@ ARG TOKEN
 ARG APP_DIR="/usr/src/app"
 ARG DATA_DIR="/usr/src/data"
 
-## ## General metadata
+## General metadata
 LABEL "name"="$NAME"
 LABEL "version"="$VERSION"
 LABEL "description"="$DESCRIPTION"
