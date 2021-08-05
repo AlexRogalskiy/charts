@@ -19,6 +19,7 @@ ARG VCS_REF="$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
 
 ARG NAME="styled-charts"
 ARG VERSION="0.0.0-dev"
+ARG PACKAGE="AlexRogalskiy/charts"
 ARG DESCRIPTION="Automatically generate styled SVG charts upon request"
 
 ## Vercel token
@@ -33,8 +34,9 @@ LABEL "name"="$NAME"
 LABEL "version"="$VERSION"
 LABEL "description"="$DESCRIPTION"
 
-LABEL "com.github.repository"="https://github.com/AlexRogalskiy/charts"
-LABEL "com.github.homepage"="https://github.com/AlexRogalskiy/charts"
+LABEL "com.github.repository"="https://github.com/${PACKAGE}"
+LABEL "com.github.homepage"="https://github.com/${PACKAGE}"
+LABEL "com.github.documentation"="https://github.com/${PACKAGE}/blob/master/README.md"
 LABEL "com.github.maintainer"="Sensiblemetrics, Inc. <hello@sensiblemetrics.io> (https://sensiblemetrics.io)"
 
 LABEL "com.github.version"="$VERSION"
@@ -88,7 +90,7 @@ RUN addgroup --gid "$GID" "$USER" \
 
 ## Installing dependencies
 RUN apt-get update \
-    && apt-get install --assume-yes \
+    && apt-get install --assume-yes --no-install-recommends \
     git \
     curl \
     locales \

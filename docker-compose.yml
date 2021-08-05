@@ -1,7 +1,47 @@
 version: '3.9'
 
+x-deploy: &deploy-template
+  deploy:
+    mode: global
+
+x-restart-deploy: &restart-deploy-template
+  <<: *deploy-template
+  deploy:
+    restart_policy:
+      condition: on-failure
+      max_attempts: 3
+      delay: 5s
+      window: 120s
+
+x-replica-deploy: &replica-deploy-template
+  <<: *deploy-template
+  deploy:
+    mode: replicated
+    replicas: 2
+    update_config:
+      parallelism: 2
+      delay: 10s
+      order: stop-first
+    resources:
+      limits:
+        cpus: '0.5'
+        memory: 1000M
+      reservations:
+        memory: 250M
+
+x-logging: &logging-template
+  logging:
+    options:
+      max-size: "100m"
+      max-file: "10"
+
+x-restart: &restart-template
+  restart: unless-stopped
+
 services:
   app:
+    <<: *deploy-template
+    <<: *logging-template
     container_name: ${APP_CONTAINER_NAME:-'styled-charts'}
     image: ${APP_IMAGE_NAME:-'styled-charts'}
     hostname: ${APP_HOST_NAME:-'styled-charts'}
@@ -9,6 +49,13 @@ services:
     build:
       context: './'
       dockerfile: Dockerfile
+      labels:
+        - "org.opencontainers.image.authors=Alexander Rogalskiy"
+        - "org.opencontainers.image.vendor=Sensiblemetrics, Inc."
+      args:
+        IMAGE_SOURCE: "$IMAGE_SOURCE"
+        IMAGE_TAG: "$IMAGE_TAG"
+        TOKEN: "$TOKEN"
     env_file:
       - .env
     volumes:
