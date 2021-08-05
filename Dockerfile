@@ -23,7 +23,7 @@ ARG PACKAGE="AlexRogalskiy/charts"
 ARG DESCRIPTION="Automatically generate styled SVG charts upon request"
 
 ## Vercel token
-ARG TOKEN
+ARG VERCEL_TOKEN
 
 ## Working directories
 ARG APP_DIR="/usr/src/app"
@@ -65,7 +65,7 @@ ENV TZ=UTC \
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV PIP_NO_CACHE_DIR=1
 
-ENV VERCEL_TOKEN $TOKEN
+ENV VERCEL_TOKEN $VERCEL_TOKEN
 
 ENV USER=$USER \
     UID=$UID \
