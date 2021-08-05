@@ -162,6 +162,8 @@ See also the list of [contributors][contributors] who participated in this proje
 
 [![Stargazers repo roster for @AlexRogalskiy/charts](https://reporoster.com/stars/AlexRogalskiy/charts)][stars]
 
+[![Stargazers over time](https://starchart.cc/AlexRogalskiy/charts.svg)][stars_chart]
+
 ## *Forks*
 
 [![Forkers repo roster for @AlexRogalskiy/charts](https://reporoster.com/forks/AlexRogalskiy/charts)][forkers]
@@ -211,6 +213,8 @@ Like ***Styled Charts*** ? Consider buying me a coffee :)
 [wiki]: https://github.com/AlexRogalskiy/charts/wiki
 
 [stars]: https://github.com/AlexRogalskiy/charts/stargazers
+
+[stars_chart]: https://starchart.cc/AlexRogalskiy/charts
 
 [forkers]: https://github.com/AlexRogalskiy/charts/network/members
 

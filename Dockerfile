@@ -60,6 +60,9 @@ ENV TZ=UTC \
     DEBIAN_FRONTEND=noninteractive \
     APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1
+ENV PIP_NO_CACHE_DIR=1
+
 ENV VERCEL_TOKEN $TOKEN
 
 ENV USER=$USER \
@@ -119,6 +122,7 @@ RUN npm install
 ## Run format checking & linting
 RUN npm run test:all
 
+## Run vercel integration
 RUN yes | vercel --confirm --token $VERCEL_TOKEN
 
 ## Setting volumes

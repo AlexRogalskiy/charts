@@ -5,10 +5,12 @@ services:
     container_name: ${APP_CONTAINER_NAME:-'styled-charts'}
     image: ${APP_IMAGE_NAME:-'styled-charts'}
     hostname: ${APP_HOST_NAME:-'styled-charts'}
+    restart: always
     build:
       context: './'
       dockerfile: Dockerfile
-    restart: always
+    env_file:
+      - .env
     volumes:
       - type: volume
         source: appvolume
