@@ -55,9 +55,14 @@ services:
       args:
         IMAGE_SOURCE: "$IMAGE_SOURCE"
         IMAGE_TAG: "$IMAGE_TAG"
-        VERCEL_TOKEN: "$VERCEL_TOKEN"
+        VERCEL_TOKEN: "/run/secrets/vercel_token"
+    secrets:
+      - vercel_token
+    entrypoint: ./scripts/entrypoint.sh
     env_file:
       - .env
+    environment:
+      VERCEL_TOKEN: /run/secrets/vercel_token
     volumes:
       - type: volume
         source: appvolume
@@ -77,7 +82,35 @@ services:
     ports:
       - '${IP_ADDRESS:-127.0.0.1}:${APP_SERVER_PORT:-3000}:3000'
 
+  web:
+    container_name: ${PROXY_APP_CONTAINER_NAME:-'proxy-styled-charts'}
+    image: ${PROXY_APP_IMAGE_NAME:-'nginx'}
+    hostname: ${PROXY_APP_HOST_NAME:-'proxy-styled-charts'}
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8443:443
+      - 8080:80
+    depends_on:
+      - app
+    volumes_from:
+      - app
+    environment:
+      - VIRTUAL_HOST
+    networks:
+      - default
+      - external
+
 networks:
+  external:
+    external: true
+  internal:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.${SUBNET}.0/24
   default:
     driver: bridge
     driver_opts:
@@ -90,3 +123,7 @@ volumes:
       o: bind
       type: none
       device: ./
+
+secrets:
+  vercel_token:
+    file: ./vercel_token.txt # put vercel token to this file

@@ -62,6 +62,7 @@ ENV TZ=UTC \
     LC_ALL=$LC_ALL \
     LANG=$LC_ALL \
     PYTHONIOENCODING=UTF-8 \
+    PYTHONLEGACYWINDOWSSTDIO=UTF-8 \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     DEBIAN_FRONTEND=noninteractive \
@@ -75,6 +76,9 @@ ENV VERCEL_TOKEN $VERCEL_TOKEN
 ENV USER=${USER:-'cukebot'} \
     UID=${UID:-5000} \
     GID=${GID:-10000}
+
+ENV npm_config_loglevel=error
+ENV IN_DOCKER=True
 
 ## Mounting volumes
 VOLUME ["$APP_DIR"]
@@ -97,11 +101,11 @@ RUN adduser \
 ## Installing dependencies
 RUN echo "**** Installing build packages ****"
 RUN add-apt-repository universe
-RUN apt-get update \
-    && apt-get install --assume-yes --no-install-recommends $PACKAGES \
+RUN apt-get update -qq \
+    && apt-get install -qq --assume-yes --no-install-recommends $PACKAGES \
     && apt-get autoclean \
     && apt-get clean \
-    && apt-get autoremove \
+    && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
 ## Installing python
@@ -133,7 +137,7 @@ RUN echo "PYTHON version: $(python3 --version)"
 
 ## Installing project dependencies
 RUN echo "**** Installing project packages ****"
-RUN npm install
+RUN npm install --no-audit
 
 ## Run format checking & linting
 RUN npm run test:all
