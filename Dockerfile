@@ -8,10 +8,6 @@ FROM $IMAGE_SOURCE:$IMAGE_TAG
 ## General arguments
 ARG PYTHON_VERSION=3.8.2
 
-ARG USER="cukebot"
-ARG UID=5000
-ARG GID=10000
-
 ARG LC_ALL="en_US.UTF-8"
 ARG VERSION="0.0.0-dev"
 ARG BUILD_DATE="$(git rev-parse --short HEAD)"
@@ -25,9 +21,17 @@ ARG DESCRIPTION="Automatically generate styled SVG charts upon request"
 ## Vercel token
 ARG VERCEL_TOKEN
 
+## User with uid/gid
+ARG USER
+ARG UID
+ARG GID
+
 ## Working directories
 ARG APP_DIR="/usr/src/app"
 ARG DATA_DIR="/usr/src/data"
+
+## Dependencies
+ARG PACKAGES="git curl tini dos2unix locales"
 
 ## General metadata
 LABEL "name"="$NAME"
@@ -59,6 +63,7 @@ ENV TZ=UTC \
     LANG=$LC_ALL \
     PYTHONIOENCODING=UTF-8 \
     PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
     DEBIAN_FRONTEND=noninteractive \
     APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
@@ -67,9 +72,9 @@ ENV PIP_NO_CACHE_DIR=1
 
 ENV VERCEL_TOKEN $VERCEL_TOKEN
 
-ENV USER=$USER \
-    UID=$UID \
-    GID=$GID
+ENV USER=${USER:-'cukebot'} \
+    UID=${UID:-5000} \
+    GID=${GID:-10000}
 
 ## Mounting volumes
 VOLUME ["$APP_DIR"]
@@ -79,24 +84,28 @@ WORKDIR $APP_DIR
 
 # Create a cukebot user. Some tools (Bundler, npm publish) don't work properly
 # when run as root
-RUN addgroup --gid "$GID" "$USER" \
-    && adduser \
+RUN addgroup --gid "$GID" "$USER" || exit 0
+RUN adduser \
     --disabled-password \
     --gecos "" \
     --ingroup "$USER" \
     --uid "$UID" \
     --shell /bin/bash \
-    "$USER"
+    "$USER" \
+    || exit 0
 
 ## Installing dependencies
+RUN echo "**** Installing build packages ****"
+RUN add-apt-repository universe
 RUN apt-get update \
-    && apt-get install --assume-yes --no-install-recommends \
-    git \
-    curl \
-    locales \
-    && apt-get clean
+    && apt-get install --assume-yes --no-install-recommends $PACKAGES \
+    && apt-get autoclean \
+    && apt-get clean \
+    && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/*
 
 ## Installing python
+RUN echo "**** Installing Python ****"
 RUN cd /tmp && curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz && \
     tar -xvf Python-${PYTHON_VERSION}.tar.xz && \
     cd Python-${PYTHON_VERSION} && \
@@ -105,13 +114,17 @@ RUN cd /tmp && curl -O https://www.python.org/ftp/python/${PYTHON_VERSION}/Pytho
     make altinstall
 
 ## Installing vercel
+RUN echo "**** Installing vercel packages ****"
 RUN npm i -g vercel
 
 ## Copying project sources
 COPY . ./
 
 ## Removing unnecessary dependencies
+RUN echo "**** Cleaning Up cache ****"
 RUN rm -rf /var/cache/apt/* /tmp/Python-${PYTHON_VERSION}
+
+#RUN dos2unix /bin/docker-command.bash
 
 ## Show versions
 RUN echo "NPM version: $(npm --version)"
@@ -119,6 +132,7 @@ RUN echo "NODE version: $(node --version)"
 RUN echo "PYTHON version: $(python3 --version)"
 
 ## Installing project dependencies
+RUN echo "**** Installing project packages ****"
 RUN npm install
 
 ## Run format checking & linting
