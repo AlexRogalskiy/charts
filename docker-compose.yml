@@ -105,12 +105,6 @@ services:
 networks:
   external:
     external: true
-  internal:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 10.0.${SUBNET}.0/24
   default:
     driver: bridge
     driver_opts:
