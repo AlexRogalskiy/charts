@@ -46,6 +46,9 @@ services:
     container_name: ${APP_CONTAINER_NAME:-'styled-charts'}
     image: ${APP_IMAGE_NAME:-'styled-charts'}
     hostname: ${APP_HOST_NAME:-'styled-charts'}
+    domainname: ${APP_DOMAIN_NAME:-'docker.local'}
+    extra_hosts:
+      - "server:127.0.0.1"
     build:
       context: './'
       dockerfile: Dockerfile
@@ -55,7 +58,7 @@ services:
       args:
         IMAGE_SOURCE: "$IMAGE_SOURCE"
         IMAGE_TAG: "$IMAGE_TAG"
-        VERCEL_TOKEN: "/run/secrets/vercel_token"
+        VERCEL_TOKEN: "$VERCEL_TOKEN"
     secrets:
       - vercel_token
     entrypoint: ./scripts/entrypoint.sh

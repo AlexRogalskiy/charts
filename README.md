@@ -59,6 +59,7 @@
 - [*Visitor stats*](#visitor-stats)
 - [*Licensing*](#licensing)
 - [*Authors*](#authors)
+- [*Kubernetes*](#kubernetes)
 - [*Versioning*](#versioning)
 - [*Contribution*](#contribution)
 - [*Acknowledgement*](#acknowledgement)
@@ -138,6 +139,20 @@ LGPLv3 is additional permissions on top of GPLv3.
 - [![Author](https://img.shields.io/badge/author-AlexRogalskiy-FB8F0A)](https://github.com/AlexRogalskiy)
 
 with community support please contact with us if you have some question or proposition.
+
+## *Kubernetes*
+
+Running k8s cluster with tilt command by acquiring k8s deployment configuration:
+
+```shell
+tilt up
+```
+
+Shutting down k8s cluster with provisioned resources removal:
+
+```shell
+tilt down --delete-namespaces
+```
 
 ## *Versioning*
 

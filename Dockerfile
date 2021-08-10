@@ -1,7 +1,7 @@
 ## Setting base OS layer
-## docker build -t container_tag --build-arg IMAGE_SOURCE=node IMAGE_TAG=lts-alpine --build-arg TOKEN=<token> .
+## docker build -t container_tag --build-arg IMAGE_SOURCE=node IMAGE_TAG=lts --build-arg TOKEN=<token> .
 ARG IMAGE_SOURCE=node
-ARG IMAGE_TAG=12-buster
+ARG IMAGE_TAG=lts
 
 FROM $IMAGE_SOURCE:$IMAGE_TAG
 
@@ -9,12 +9,11 @@ FROM $IMAGE_SOURCE:$IMAGE_TAG
 ARG PYTHON_VERSION=3.8.2
 
 ARG LC_ALL="en_US.UTF-8"
-ARG VERSION="0.0.0-dev"
-ARG BUILD_DATE="$(git rev-parse --short HEAD)"
-ARG VCS_REF="$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
+ARG BUILD_DATE="$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")"
+ARG VCS_REF="$(git rev-parse --short HEAD)"
 
 ARG NAME="styled-charts"
-ARG VERSION="0.0.0-dev"
+ARG VERSION="$(git describe --abbrev=0 --tag)"
 ARG PACKAGE="AlexRogalskiy/charts"
 ARG DESCRIPTION="Automatically generate styled SVG charts upon request"
 
@@ -31,7 +30,7 @@ ARG APP_DIR="/usr/src/app"
 ARG DATA_DIR="/usr/src/data"
 
 ## Dependencies
-ARG PACKAGES="git curl tini dos2unix locales"
+ARG PACKAGES="git curl dumb-init gosu dos2unix locales"
 
 ## General metadata
 LABEL "name"="$NAME"
@@ -132,7 +131,7 @@ RUN rm -rf /var/cache/apt/* /tmp/Python-${PYTHON_VERSION}
 
 ## Show versions
 RUN echo "NPM version: $(npm --version)"
-RUN echo "NODE version: $(node --version)"
+RUN echo "NODE version: $(node --version | awk -F. '{print \"$1\"}')"
 RUN echo "PYTHON version: $(python3 --version)"
 
 ## Installing project dependencies
@@ -141,6 +140,8 @@ RUN npm install --no-audit
 
 ## Run format checking & linting
 RUN npm run test:all
+
+RUN npm cache clean --force
 
 ## Run vercel integration
 RUN yes | vercel --confirm --token $VERCEL_TOKEN
@@ -155,4 +156,5 @@ USER $USER
 EXPOSE 3000
 
 ## Running package bundle
+#ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
 CMD ["npm", "run", "develop:docker"]
