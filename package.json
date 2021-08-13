@@ -81,7 +81,7 @@
         "@semantic-release/release-notes-generator": "^9.0.3",
         "@types/form-data": "^2.5.0",
         "@types/formidable": "^1.2.3",
-        "@types/jest": "^26.0.24",
+        "@types/jest": "^27.0.1",
         "@types/lodash.mergewith": "^4.6.6",
         "@types/prettier": "^2.3.2",
         "@typescript-eslint/eslint-plugin": "^4.28.4",
