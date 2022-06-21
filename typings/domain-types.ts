@@ -1,4 +1,4 @@
-import boxen from 'boxen'
+import {Options} from 'boxen'
 
 import { Keys } from './standard-types'
 
@@ -170,6 +170,6 @@ export type ProfileOptions = {
     /**
      * Logging configuration options
      */
-    readonly outputOptions?: Partial<boxen.Options>
+    readonly outputOptions?: Partial<Options>
 }
 //--------------------------------------------------------------------------------------------------

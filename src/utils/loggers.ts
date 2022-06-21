@@ -1,4 +1,4 @@
-import dateFormat from 'dateformat'
+import * as dateformat from 'date-format'
 import boxen from 'boxen'
 
 import { Processor } from '../../typings/standard-types'
@@ -37,8 +37,8 @@ const COLORS = {
     WHITE: getColor('\u001B[1;37m'),
 }
 
-const getTime = (format = DATETIME_FORMAT, utc = false): string => {
-    return dateFormat(Date.now(), format, utc)
+const getTime = (format = DATETIME_FORMAT): string => {
+    return dateformat.asString(format, Date.now())
 }
 
 export const toLog = (message: string, ...args: any[]): void => {

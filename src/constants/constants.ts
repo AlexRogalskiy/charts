@@ -1,4 +1,4 @@
-import boxen from 'boxen'
+import {Options} from 'boxen'
 
 import { ImageContentType, ImageOptions, LocationOptions, ResourceOptions } from '../../typings/domain-types'
 import { Headers, KeyRecord, StringRecord } from '../../typings/standard-types'
@@ -34,7 +34,7 @@ export const IMAGE_ENCODING: KeyRecord<typeof IMAGE_ENCODINGS[number]> = strToEn
 /**
  * Output configuration options
  */
-export const OUTPUT_OPTIONS: Readonly<boxen.Options> = {
+export const OUTPUT_OPTIONS: Readonly<Options> = {
     padding: 1,
     margin: 1,
     borderStyle: 'single',
