@@ -111,7 +111,7 @@
         "husky": "^8.0.1",
         "jest": "^28.1.1",
         "jest-canvas-mock": "^2.4.0",
-        "jest-circus": "^28.1.1",
+        "jest-circus": "^29.4.3",
         "jsonlint": "^1.6.3",
         "license-checker": "^25.0.1",
         "markdown-link-check": "^3.10.2",
