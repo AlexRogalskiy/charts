@@ -96,7 +96,7 @@
         "del-cli": "^4.0.1",
         "dockerfile_lint": "^0.3.4",
         "eslint": "^8.18.0",
-        "eslint-config-prettier": "^8.5.0",
+        "eslint-config-prettier": "^9.0.0",
         "eslint-import-resolver-typescript": "^2.7.1",
         "eslint-plugin-eslint-comments": "^3.2.0",
         "eslint-plugin-github": "^4.3.6",
