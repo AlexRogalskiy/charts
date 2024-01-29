@@ -108,7 +108,7 @@
         "eslint-plugin-unicorn": "^42.0.0",
         "git-cz": "^4.9.0",
         "gradient-string": "^2.0.1",
-        "husky": "^8.0.1",
+        "husky": "^9.0.0",
         "jest": "^28.1.1",
         "jest-canvas-mock": "^2.4.0",
         "jest-circus": "^28.1.1",
