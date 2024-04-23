@@ -64,7 +64,7 @@
     },
     "dependencies": {
         "env-cmd": "^10.1.0",
-        "formidable": "^2.0.1",
+        "formidable": "^3.2.4",
         "if-env": "^1.0.4",
         "isomorphic-unfetch": "^3.1.0",
         "jsdom": "^20.0.0",
