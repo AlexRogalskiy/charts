@@ -90,7 +90,7 @@
         "boxen": "^5.0.1",
         "canvas": "^2.6.1",
         "codecov": "^3.8.3",
-        "conventional-changelog-cli": "^2.2.2",
+        "conventional-changelog-cli": "^5.0.0",
         "coveralls": "^3.1.1",
         "date-format": "4.0.11",
         "del-cli": "^4.0.1",
