@@ -107,7 +107,7 @@
         "eslint-plugin-spellcheck": "^0.0.19",
         "eslint-plugin-unicorn": "^42.0.0",
         "git-cz": "^4.9.0",
-        "gradient-string": "^2.0.1",
+        "gradient-string": "^3.0.0",
         "husky": "^8.0.1",
         "jest": "^28.1.1",
         "jest-canvas-mock": "^2.4.0",
