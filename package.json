@@ -71,7 +71,7 @@
         "lodash": "^4.17.21",
         "lodash.clonedeep": "^4.5.0",
         "lodash.isequal": "^4.5.0",
-        "plotly.js-dist": "^2.12.1",
+        "plotly.js-dist": "^3.0.0",
         "plotly.js-geo-dist": "^2.12.1",
         "qs": "^6.10.5"
     },
