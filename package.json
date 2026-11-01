@@ -141,7 +141,7 @@
         "access": "public"
     },
     "engines": {
-        "node": ">= 10.x"
+        "node": "27.0.0-alpha.0.0.0"
     },
     "keywords": [
         "plotly charts",
